@@ -8,7 +8,10 @@
   `npm run build` 
 
 ## to start the project 
-  `npm run start`
+  `npm run start` production mode
+
+## to start the project 
+  `npm run serve` development mode
 
 ## swagger API documenation
   * see what end points are available. 

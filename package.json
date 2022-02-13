@@ -9,7 +9,7 @@
     "serve": "cross-env NODE_ENV=development concurrently \"tsc --watch\" \"nodemon -q dist/app.js\"",
     "prestart": "npm run build",
     "start": "cross-env NODE_ENV=production node dist/app.js",
-    "seed": "node dist/seeder/user.seeder.js",
+    "seed": "node dist/seeder/sample.seeder.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --ext .ts"
   },
@@ -44,6 +44,8 @@
     "helmet": "^5.0.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
     "rimraf": "^3.0.2",
     "sequelize": "^6.16.1",
     "swagger-jsdoc": "^6.1.0",

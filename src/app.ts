@@ -5,6 +5,8 @@ import dontenv from 'dotenv'
 import systemRoute from './routes/system/systemRoute'
 import swaggerUi from 'swagger-ui-express'
 import swaggerJsdoc  from 'swagger-jsdoc'
+import transRoute from './routes/transRoute'
+
 const app:Express = express()
 const PORT = process.env.PORT || 2707
 
@@ -33,7 +35,7 @@ const options = {
       },
     ],
   },
-  apis: ["./dist/routes/*/*.js"],
+  apis: ["./dist/routes/system/*.js", "./dist/routes/*.js"],
 };
 
 const specs = swaggerJsdoc(options);
@@ -42,7 +44,9 @@ app.use(helmet())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.json())
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true}))
+app.use('/transactions', transRoute)
 app.use('/system', systemRoute)
+
 
 app.get('/', (req: Request, res: Response) => {
   res.status(200).send('service is running')
