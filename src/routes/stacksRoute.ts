@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express"
+import Stacks from '../models/stacks'
 import Transactions from "../models/transactions";
-import Wallets from '../models/wallets'
-const walletsRoute = Router()
+const stacksRoute = Router()
 
 interface Query {
     page: number;
@@ -12,50 +12,34 @@ interface Query {
  * @openapi
  *  components: 
  *    schemas:
- *      Wallets:
+ *      Stacks:
  *         type: object
  *         required:
- *            - walletId
- *            - email
- *            - phone
- *            - personaId
- *            - nearValue
- *            - transxRate
+ *            - stackId
+ *            - appName
  *         properties:
- *             walletId:
+ *             stackId:
  *                  type: string
- *                  description: Wallet id or user id
- *             email:
+ *                  description: App id or stack id
+ *             appName:
  *                   type: string
- *                   description: User email
- *             phone:
- *                   type: string
- *                   description: User phone
- *             personaId:
- *                   type: string
- *                   description: Persona id associated
- *             nearValue:
- *                   type: string
- *                   description: Near value
- *             transxRate:
- *                   type: string
- *                   description: Transaction rate
+ *                   description: App name 
  */
 
 /**
  * @swagger
  * tags:
- *   name: Wallets
- *   description: Retrieve wallet (user) records
+ *   name: Stacks
+ *   description: Retrieve Stacks (App) records
 */
 
 /**
  * @swagger
- * /wallets:
+ * /stacks:
  *   get:
- *     summary: Retrieve list of wallets with pagination (filter).
- *     description: Retrieve list of wallets.
- *     tags: [Wallets]
+ *     summary: Retrieve list of App with pagination (filter).
+ *     description: Retrieve list of Apps.
+ *     tags: [Stacks]
  *     parameters:
  *       - in: query
  *         name: page
@@ -67,11 +51,11 @@ interface Query {
  *         description: page size or limit.
  *     responses:
  *       200:
- *         description: List of wallets.
+ *         description: List of Apps.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Wallets'
+ *               $ref: '#/components/schemas/Stacks'
  *               properties:
  *                 data:
  *                   type: array
@@ -79,10 +63,10 @@ interface Query {
  *         
 */
 
-walletsRoute.get('/', (req: Request, res: Response) => {
+stacksRoute.get('/', (req: Request, res: Response) => {
     const { page, size } = req.query as unknown as Query;
     const offset = (page -1) * size;
-    Wallets.findAndCountAll(
+    Stacks.findAndCountAll(
         { 
             offset: offset, limit: size,
             include: [
@@ -112,37 +96,37 @@ walletsRoute.get('/', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /wallets/{walletId}:
+ * /stacks/{stackId}:
  *   get:
- *     summary: Retrieve a User wallet by wallet id.
- *     description: Retrieve a single wallet.
- *     tags: [Wallets]
+ *     summary: Retrieve a Stack by app/stack id.
+ *     description: Retrieve a single App.
+ *     tags: [Stacks]
  *     parameters:
  *       - in: path
- *         name: walletId
+ *         name: stackId
  *         required: true
- *         description: ID of the wallet to retrieve.
+ *         description: ID of the App to retrieve.
  *     responses:
  *       200:
- *         description: A single wallet data.
+ *         description: A single App data.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Wallets'
+ *               $ref: '#/components/schemas/Stacks'
  *               properties:
  *                 data:
  *                   type: object
  *                   properties:
- *                     walletId:
+ *                     stackId:
  *                       type: string
  *                       description: The wallet id.
- *                       example: yzyz.near
+ *                       example: 809da4b0-79e1-4089-a124-0568b31f549j
  *         
 */
 
-walletsRoute.get('/:walletId', (req: Request | any, res: Response) => {
-    Wallets.findAll({
-        where : {walletId: req.params.walletId}, 
+stacksRoute.get('/:stackId', (req: Request | any, res: Response) => {
+    Stacks.findAll({
+        where : {stackId: req.params.stackId}, 
         include: [
             {
                 model: Transactions,
@@ -161,4 +145,4 @@ walletsRoute.get('/:walletId', (req: Request | any, res: Response) => {
     });
 })
 
-export = walletsRoute
+export = stacksRoute

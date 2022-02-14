@@ -7,6 +7,7 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerJsdoc  from 'swagger-jsdoc'
 import transRoute from './routes/transRoute'
 import walletsRoute from './routes/walletsRoute'
+import stacksRoute from './routes/stacksRoute'
 
 const app:Express = express()
 const PORT = process.env.PORT || 2707
@@ -47,6 +48,7 @@ app.use(express.json())
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true}))
 app.use('/transactions', transRoute)
 app.use('/wallets', walletsRoute)
+app.use('/stacks', stacksRoute)
 app.use('/system', systemRoute)
 
 

@@ -11,6 +11,15 @@ export = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      stackId: {
+        type: Sequelize.STRING,
+        references : {
+          model : 'Stacks',
+          key : 'stackId'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
       sliceId: {
         type: Sequelize.STRING,
         allowNull: false
