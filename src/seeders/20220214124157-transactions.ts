@@ -17,6 +17,7 @@ export = {
       {
         transactionHash: '1VdQ4GkGVuRTuNXiqUchQGLxMydP9nDBKH91Nj4QCzzq',
         receiptId: 'a09da4b0-79e1-4089-a124-0568b31f549b.feiyu.near',
+        stackId: '779da4b0-79e1-4089-a124-0568b31f54cc',
         sliceId: 'b09da4b0-79e1-4089-a124-0568b31f549b',
         walletId: 'yzyz.near',
         tagsJson: JSON.stringify(tagsJson),
@@ -26,7 +27,8 @@ export = {
       {
         transactionHash: '2VdQ4GkGVuRTuNXiqUchQGLxMydP9nDBKH91Nj4QCzzb',
         receiptId: 'a09da4b0-79e1-4089-a124-0568b31f549b.feiyu.near',
-        sliceId: 'b09da4b0-79e1-4089-a124-0568b31f549b',
+        stackId: '809da4b0-79e1-4089-a124-0568b31f549j',
+        sliceId: 'k00da4b0-79e1-4089-a124-0568b31f549c',
         walletId: 'bmw.near',
         tagsJson: JSON.stringify(tagsJson),
         createdAt: new Date(),
@@ -35,6 +37,7 @@ export = {
       {
         transactionHash: '3VdQ4GkGVuRTuNXiqUchQGLxMydP9nDBKH91Nj4QCzzc',
         receiptId: 'a09da4b0-79e1-4089-a124-0568b31f549b.yellow.near',
+        stackId: '809da4b0-79e1-4089-a124-0568b31f549j',
         sliceId: 'b09da4b0-79e1-4089-a124-0568b31f549b',
         walletId: 'yzyz.near',
         tagsJson: JSON.stringify(tagsJson),
@@ -44,6 +47,7 @@ export = {
       {
         transactionHash: '4VdQ4GkGVuRTuNXiqUchQGLxMydP9nDBKH91Nj4QCzzd',
         receiptId: 'a09da4b0-79e1-4089-a124-0568b31f549b.feiyu.near',
+        stackId: '809da4b0-79e1-4089-a124-0568b31f549j',
         sliceId: 'b09da4b0-79e1-4089-a124-0568b31f549b',
         walletId: 'yzyz.near',
         tagsJson: JSON.stringify(tagsJson),
@@ -53,6 +57,7 @@ export = {
       {
         transactionHash: '5VdQ4GkGVuRTuNXiqUchQGLxMydP9nDBKH91Nj4QCzze',
         receiptId: 'a09da4b0-79e1-4089-a124-0568b31f549b.feiyu.near',
+        stackId: 'b09da4b0-79e1-4089-a124-0568b31f549b',
         sliceId: 'b09da4b0-79e1-4089-a124-0568b31f549b',
         walletId: 'bmw.near',
         tagsJson: JSON.stringify(tagsJson),
@@ -62,6 +67,7 @@ export = {
       {
         transactionHash: 'DqozjvmrhrZ1Gnn9WMToRswNmadGU5SHoK13ug1LoEQF',
         receiptId: 'a09da4b0-79e1-4089-a124-0568b31f549b.yellow.near',
+        stackId: '779da4b0-79e1-4089-a124-0568b31f54cc',
         sliceId: 'b09da4b0-79e1-4089-a124-0568b31f549b',
         walletId: 'yzyz.near',
         tagsJson: JSON.stringify(tagsJson),
