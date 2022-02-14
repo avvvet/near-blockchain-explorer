@@ -36,7 +36,7 @@ export = {
         transactionHash: '3VdQ4GkGVuRTuNXiqUchQGLxMydP9nDBKH91Nj4QCzzc',
         receiptId: 'a09da4b0-79e1-4089-a124-0568b31f549b.yellow.near',
         sliceId: 'b09da4b0-79e1-4089-a124-0568b31f549b',
-        walletId: 'zoor.near',
+        walletId: 'yzyz.near',
         tagsJson: JSON.stringify(tagsJson),
         createdAt: new Date(),
         updatedAt: new Date()
@@ -63,7 +63,7 @@ export = {
         transactionHash: 'DqozjvmrhrZ1Gnn9WMToRswNmadGU5SHoK13ug1LoEQF',
         receiptId: 'a09da4b0-79e1-4089-a124-0568b31f549b.yellow.near',
         sliceId: 'b09da4b0-79e1-4089-a124-0568b31f549b',
-        walletId: 'zoor.near',
+        walletId: 'yzyz.near',
         tagsJson: JSON.stringify(tagsJson),
         createdAt: new Date(),
         updatedAt: new Date()

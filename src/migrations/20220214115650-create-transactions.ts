@@ -17,7 +17,12 @@ export = {
       },
       walletId: {
         type: Sequelize.STRING,
-        allowNull: false
+        references : {
+          model : 'Wallets',
+          key : 'walletId'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       tagsJson: {
         type: Sequelize.JSON,
