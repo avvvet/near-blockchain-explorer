@@ -22,7 +22,12 @@ export = {
       },
       sliceId: {
         type: Sequelize.STRING,
-        allowNull: false
+        references : {
+          model : 'Slices',
+          key : 'sliceId'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       walletId: {
         type: Sequelize.STRING,
