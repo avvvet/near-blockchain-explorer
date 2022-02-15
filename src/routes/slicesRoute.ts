@@ -1,7 +1,8 @@
 import { Router, Request, Response } from "express"
+import Slices from "../models/slices";
 import Stacks from '../models/stacks'
 import Transactions from "../models/transactions";
-const stacksRoute = Router()
+const slicesRoute = Router()
 
 interface Query {
     page: number;
@@ -12,34 +13,34 @@ interface Query {
  * @openapi
  *  components: 
  *    schemas:
- *      Stacks:
+ *      Slices:
  *         type: object
  *         required:
- *            - stackId
- *            - appName
+ *            - sliceId
+ *            - actionName
  *         properties:
- *             stackId:
+ *             sliceId:
  *                  type: string
- *                  description: App id or stack id
- *             appName:
+ *                  description: Action id or slice id
+ *             actionName:
  *                   type: string
- *                   description: App name 
+ *                   description: Action name 
  */
 
 /**
  * @swagger
  * tags:
- *   name: Stacks
- *   description: Retrieve Stacks (App) records
+ *   name: SLices
+ *   description: Retrieve Slices (Action) records
 */
 
 /**
  * @swagger
- * /stacks:
+ * /slices:
  *   get:
- *     summary: Retrieve list of App with pagination (filter).
- *     description: Retrieve list of Apps.
- *     tags: [Stacks]
+ *     summary: Retrieve list of Actions with pagination (filter).
+ *     description: Retrieve list of Slices.
+ *     tags: [Slices]
  *     parameters:
  *       - in: query
  *         name: page
@@ -51,11 +52,11 @@ interface Query {
  *         description: page size or limit.
  *     responses:
  *       200:
- *         description: List of Apps.
+ *         description: List of Slices.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Stacks'
+ *               $ref: '#/components/schemas/Slices'
  *               properties:
  *                 data:
  *                   type: array
@@ -63,10 +64,10 @@ interface Query {
  *         
 */
 
-stacksRoute.get('/', (req: Request, res: Response) => {
+slicesRoute.get('/', (req: Request, res: Response) => {
     const { page, size } = req.query as unknown as Query;
     const offset = (page -1) * size;
-    Stacks.findAndCountAll(
+    Slices.findAndCountAll(
         { 
             offset: offset, limit: size,
             include: [
@@ -96,37 +97,37 @@ stacksRoute.get('/', (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /stacks/{stackId}:
+ * /slices/{sliceId}:
  *   get:
- *     summary: Retrieve a Stack by app/stack id.
- *     description: Retrieve a single App.
- *     tags: [Stacks]
+ *     summary: Retrieve a Slice by action id.
+ *     description: Retrieve a single Slice.
+ *     tags: [Slices]
  *     parameters:
  *       - in: path
- *         name: stackId
+ *         name: sliceId
  *         required: true
- *         description: ID of the App to retrieve.
+ *         description: ID of the Slice to retrieve.
  *     responses:
  *       200:
- *         description: A single App data.
+ *         description: A single Slice data.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Stacks'
+ *               $ref: '#/components/schemas/Slice'
  *               properties:
  *                 data:
  *                   type: object
  *                   properties:
  *                     stackId:
  *                       type: string
- *                       description: The stack id.
+ *                       description: The slice id.
  *                       example: 809da4b0-79e1-4089-a124-0568b31f549j
  *         
 */
 
-stacksRoute.get('/:stackId', (req: Request | any, res: Response) => {
-    Stacks.findAll({
-        where : {stackId: req.params.stackId}, 
+slicesRoute.get('/:sliceId', (req: Request | any, res: Response) => {
+    Slices.findAll({
+        where : {sliceId: req.params.sliceId}, 
         include: [
             {
                 model: Transactions,
@@ -145,4 +146,4 @@ stacksRoute.get('/:stackId', (req: Request | any, res: Response) => {
     });
 })
 
-export = stacksRoute
+export = slicesRoute
