@@ -21,7 +21,7 @@ export = {
         onDelete: 'CASCADE',
       },
       sliceId: {
-        type: Sequelize.STRING,
+        type: Sequelize.BIGINT,
         references : {
           model : 'Slices',
           key : 'sliceId'

@@ -8,8 +8,8 @@ class Slices extends Model {
 }
 
 Slices.init({
-  sliceId: { 
-    type : DataTypes.STRING,
+  sliceId: {
+    type : DataTypes.BIGINT,
     primaryKey: true
   },
   actionName: DataTypes.STRING

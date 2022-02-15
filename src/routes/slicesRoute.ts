@@ -11,7 +11,7 @@ interface Query {
 
 /**
  * @openapi
- *  components: 
+ *  components:
  *    schemas:
  *      Slices:
  *         type: object
@@ -20,11 +20,11 @@ interface Query {
  *            - actionName
  *         properties:
  *             sliceId:
- *                  type: string
+ *                  type: number
  *                  description: Action id or slice id
  *             actionName:
  *                   type: string
- *                   description: Action name 
+ *                   description: Action name
  */
 
 /**
@@ -60,15 +60,15 @@ interface Query {
  *               properties:
  *                 data:
  *                   type: array
- *                   
- *         
+ *
+ *
 */
 
 slicesRoute.get('/', (req: Request, res: Response) => {
     const { page, size } = req.query as unknown as Query;
     const offset = (page -1) * size;
     Slices.findAndCountAll(
-        { 
+        {
             offset: offset, limit: size,
             include: [
                 {
@@ -113,21 +113,21 @@ slicesRoute.get('/', (req: Request, res: Response) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Slice'
+ *               $ref: '#/components/schemas/Slices'
  *               properties:
  *                 data:
  *                   type: object
  *                   properties:
  *                     stackId:
- *                       type: string
+ *                       type: number
  *                       description: The slice id.
- *                       example: 809da4b0-79e1-4089-a124-0568b31f549j
- *         
+ *                       example: 1
+ *
 */
 
 slicesRoute.get('/:sliceId', (req: Request | any, res: Response) => {
     Slices.findAll({
-        where : {sliceId: req.params.sliceId}, 
+        where : {sliceId: req.params.sliceId},
         include: [
             {
                 model: Transactions,
