@@ -12,13 +12,13 @@ export = {
       method_name: 'send_tokens'
     }
 
-    await queryInterface.bulkInsert('Transactions', 
+    await queryInterface.bulkInsert('Transactions',
     [
       {
         transactionHash: '1VdQ4GkGVuRTuNXiqUchQGLxMydP9nDBKH91Nj4QCzzq',
         receiptId: 'a09da4b0-79e1-4089-a124-0568b31f549b.feiyu.near',
-        stackId: '779da4b0-79e1-4089-a124-0568b31f54cc',
-        sliceId: 'uu9da4b0-79e1-4089-a124-0568b31f54jh',
+        stackId: 1,
+        sliceId: '1',
         walletId: 'yzyz.near',
         tagsJson: JSON.stringify(tagsJson),
         createdAt: new Date(),
@@ -27,8 +27,8 @@ export = {
       {
         transactionHash: '2VdQ4GkGVuRTuNXiqUchQGLxMydP9nDBKH91Nj4QCzzb',
         receiptId: 'a09da4b0-79e1-4089-a124-0568b31f549b.feiyu.near',
-        stackId: '809da4b0-79e1-4089-a124-0568b31f549j',
-        sliceId: '559da4b0-79e1-4089-a124-0568b31f54cc',
+        stackId: 1,
+        sliceId: '1',
         walletId: 'bmw.near',
         tagsJson: JSON.stringify(tagsJson),
         createdAt: new Date(),
@@ -37,8 +37,8 @@ export = {
       {
         transactionHash: '3VdQ4GkGVuRTuNXiqUchQGLxMydP9nDBKH91Nj4QCzzc',
         receiptId: 'a09da4b0-79e1-4089-a124-0568b31f549b.yellow.near',
-        stackId: '809da4b0-79e1-4089-a124-0568b31f549j',
-        sliceId: 'uu9da4b0-79e1-4089-a124-0568b31f54jh',
+        stackId: 2,
+        sliceId: '2',
         walletId: 'yzyz.near',
         tagsJson: JSON.stringify(tagsJson),
         createdAt: new Date(),
@@ -47,8 +47,8 @@ export = {
       {
         transactionHash: '4VdQ4GkGVuRTuNXiqUchQGLxMydP9nDBKH91Nj4QCzzd',
         receiptId: 'a09da4b0-79e1-4089-a124-0568b31f549b.feiyu.near',
-        stackId: '809da4b0-79e1-4089-a124-0568b31f549j',
-        sliceId: '559da4b0-79e1-4089-a124-0568b31f54cc',
+        stackId: 2,
+        sliceId: '2',
         walletId: 'yzyz.near',
         tagsJson: JSON.stringify(tagsJson),
         createdAt: new Date(),
@@ -57,8 +57,8 @@ export = {
       {
         transactionHash: '5VdQ4GkGVuRTuNXiqUchQGLxMydP9nDBKH91Nj4QCzze',
         receiptId: 'a09da4b0-79e1-4089-a124-0568b31f549b.feiyu.near',
-        stackId: 'b09da4b0-79e1-4089-a124-0568b31f549b',
-        sliceId: '559da4b0-79e1-4089-a124-0568b31f54cc',
+        stackId: 2,
+        sliceId: '1',
         walletId: 'bmw.near',
         tagsJson: JSON.stringify(tagsJson),
         createdAt: new Date(),
@@ -67,8 +67,8 @@ export = {
       {
         transactionHash: 'DqozjvmrhrZ1Gnn9WMToRswNmadGU5SHoK13ug1LoEQF',
         receiptId: 'a09da4b0-79e1-4089-a124-0568b31f549b.yellow.near',
-        stackId: '779da4b0-79e1-4089-a124-0568b31f54cc',
-        sliceId: 'uu9da4b0-79e1-4089-a124-0568b31f54jh',
+        stackId: 3,
+        sliceId: '2',
         walletId: 'yzyz.near',
         tagsJson: JSON.stringify(tagsJson),
         createdAt: new Date(),

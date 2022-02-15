@@ -10,7 +10,7 @@ interface Query {
 
 /**
  * @openapi
- *  components: 
+ *  components:
  *    schemas:
  *      Stacks:
  *         type: object
@@ -19,11 +19,11 @@ interface Query {
  *            - appName
  *         properties:
  *             stackId:
- *                  type: string
+ *                  type: number
  *                  description: App id or stack id
  *             appName:
  *                   type: string
- *                   description: App name 
+ *                   description: App name
  */
 
 /**
@@ -59,15 +59,15 @@ interface Query {
  *               properties:
  *                 data:
  *                   type: array
- *                   
- *         
+ *
+ *
 */
 
 stacksRoute.get('/', (req: Request, res: Response) => {
     const { page, size } = req.query as unknown as Query;
     const offset = (page -1) * size;
     Stacks.findAndCountAll(
-        { 
+        {
             offset: offset, limit: size,
             include: [
                 {
@@ -118,15 +118,15 @@ stacksRoute.get('/', (req: Request, res: Response) => {
  *                   type: object
  *                   properties:
  *                     stackId:
- *                       type: string
+ *                       type: number
  *                       description: The stack id.
- *                       example: 809da4b0-79e1-4089-a124-0568b31f549j
- *         
+ *                       example: 1
+ *
 */
 
 stacksRoute.get('/:stackId', (req: Request | any, res: Response) => {
     Stacks.findAll({
-        where : {stackId: req.params.stackId}, 
+        where : {stackId: req.params.stackId},
         include: [
             {
                 model: Transactions,

@@ -3,13 +3,13 @@ import { sequelize } from '.'
 import Transactions from './transactions';
 
 class Stacks extends Model {
-      declare stackId: string
+      declare stackId: number
       declare appName: string
 }
 
 Stacks.init({
-  stackId: { 
-    type : DataTypes.STRING,
+  stackId: {
+    type : DataTypes.BIGINT,
     primaryKey: true
   },
   appName: DataTypes.STRING

@@ -2,22 +2,22 @@
   what is it ? backend service API for indexer.
 
 ## init project
- `npm install` 
+ `npm install`
 
 ## build typscript
-  `npm run build` 
+  `npm run build`
 
-## to start the project 
+## to start the project
   `npm run start` production mode
 
-## to start the project 
+## to start the project
   `npm run serve` development mode
 
 ## swagger API documenation
-  * see what end points are available. 
+  * see what end points are available.
   `http://127.0.0.1:2707/api-docs`
 
-## .env 
+## .env
  create .env file in the root dir. make sure the credential are correct before moving on.
 
  ```
@@ -29,13 +29,18 @@
   DB_DIALECT="postgres"
 
  ```
-## database 
+## database
   ` - create new RDS for PostgreSQL or your choice db`
   ` - create new user account with create database role`
 
 ## migration
-  
+
   `npx sequelize db:create` will create new PostgreSQL db
+
+  `npx sequelize db:drop` will drop new PostgreSQL db ATENTION
 
   `npx sequelize db:migrate` creates models
 
+  `npx sequelize db:seed:all` to seed the test data
+
+  `npx sequelize db:migrate:undo` undo a migration

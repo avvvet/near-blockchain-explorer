@@ -9,7 +9,7 @@ interface Query {
 
 /**
  * @openapi
- *  components: 
+ *  components:
  *    schemas:
  *      Transactions:
  *         type: object
@@ -27,7 +27,7 @@ interface Query {
  *                   type: string
  *                   description: Receipt account
  *             sliceId:
- *                   type: string
+ *                   type: number
  *                   description: Slice
  *             walletId:
  *                   type: string
@@ -75,14 +75,14 @@ interface Query {
  *                       type: string
  *                       description: The transaction id.
  *                       example: DqozjvmrhrZ1Gnn9WMToRswNmadGU5SHoK13ug1LoEQF
- *         
+ *
 */
 
 transRoute.get('/', (req: Request, res: Response) => {
     const { page, size } = req.query as unknown as Query;
     const offset = (page -1) * size;
     Trans.findAndCountAll(
-        { 
+        {
             offset: offset, limit: size,
             order: [
                 ['createdAt', 'DESC']
@@ -130,12 +130,12 @@ transRoute.get('/', (req: Request, res: Response) => {
  *                       type: string
  *                       description: The transaction id.
  *                       example: DqozjvmrhrZ1Gnn9WMToRswNmadGU5SHoK13ug1LoEQF
- *         
+ *
 */
 
 transRoute.get('/:transactionHash', (req: Request | any, res: Response) => {
     Trans.findAll({
-        where : {transactionHash: req.params.transactionHash}, 
+        where : {transactionHash: req.params.transactionHash},
         order: [
             ['createdAt', 'DESC']
           ],
