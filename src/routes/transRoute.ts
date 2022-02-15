@@ -142,7 +142,7 @@ transRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
  *
 */
 
-transRoute.get('/:transactionHash', verifyAuthorization, (req: Request | any, res: Response) => {
+transRoute.get('/:transactionHash', (req: Request | any, res: Response) => {
     Trans.findAll({
         where : {transactionHash: req.params.transactionHash},
         order: [
