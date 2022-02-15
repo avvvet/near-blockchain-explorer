@@ -1,5 +1,4 @@
 import { Router, Request, Response } from "express"
-import { verifyAuthorization } from "../middleware/authorization";
 import Transactions from "../models/transactions";
 import Wallets from '../models/wallets'
 const walletsRoute = Router()

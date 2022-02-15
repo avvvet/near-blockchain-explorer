@@ -1,5 +1,4 @@
 import { Router, Request, Response } from "express"
-import { verifyAuthorization } from "../middleware/authorization";
 import Trans from '../models/transactions'
 const transRoute = Router()
 
@@ -83,7 +82,7 @@ interface Query {
  *
 */
 
-transRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
+transRoute.get('/', (req: Request, res: Response) => {
     const { page, size } = req.query as unknown as Query;
     const offset = (page -1) * size;
     Trans.findAndCountAll(

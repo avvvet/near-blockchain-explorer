@@ -1,7 +1,5 @@
 import { Router, Request, Response } from "express"
-import { verifyAuthorization } from "../middleware/authorization";
 import Slices from "../models/slices";
-import Stacks from '../models/stacks'
 import Transactions from "../models/transactions";
 const slicesRoute = Router()
 
