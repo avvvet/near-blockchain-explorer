@@ -1,4 +1,5 @@
 import { Router, Request, Response } from "express"
+import { verifyAuthorization } from "../middleware/authorization";
 import Trans from '../models/transactions'
 const transRoute = Router()
 
@@ -41,7 +42,7 @@ interface Query {
  * @swagger
  * tags:
  *   name: Transactions
- *   description: Retrieve a single transaction..
+ *   description: Retrieve transactions
 */
 
 /**
@@ -52,6 +53,10 @@ interface Query {
  *     description: Retrieve transactions.
  *     tags: [Transactions]
  *     parameters:
+ *       - in: header
+ *         name: jwt_token
+ *         type: apiKey
+ *         required: true
  *       - in: query
  *         name: page
  *         required: true
@@ -78,7 +83,7 @@ interface Query {
  *         
 */
 
-transRoute.get('/', (req: Request, res: Response) => {
+transRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
     const { page, size } = req.query as unknown as Query;
     const offset = (page -1) * size;
     Trans.findAndCountAll(
@@ -111,6 +116,10 @@ transRoute.get('/', (req: Request, res: Response) => {
  *     description: Retrieve a single transaction.
  *     tags: [Transactions]
  *     parameters:
+ *       - in: header
+ *         name: jwt_token
+ *         type: apiKey
+ *         required: true
  *       - in: path
  *         name: transactionHash
  *         required: true
@@ -133,7 +142,7 @@ transRoute.get('/', (req: Request, res: Response) => {
  *         
 */
 
-transRoute.get('/:transactionHash', (req: Request | any, res: Response) => {
+transRoute.get('/:transactionHash', verifyAuthorization, (req: Request | any, res: Response) => {
     Trans.findAll({
         where : {transactionHash: req.params.transactionHash}, 
         order: [

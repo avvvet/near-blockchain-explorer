@@ -1,4 +1,5 @@
 import { Router, Request, Response } from "express"
+import { verifyAuthorization } from "../middleware/authorization";
 import Transactions from "../models/transactions";
 import Wallets from '../models/wallets'
 const walletsRoute = Router()
@@ -57,6 +58,10 @@ interface Query {
  *     description: Retrieve list of wallets.
  *     tags: [Wallets]
  *     parameters:
+ *       - in: header
+ *         name: jwt_token
+ *         type: apiKey
+ *         required: true
  *       - in: query
  *         name: page
  *         required: true
@@ -75,11 +80,9 @@ interface Query {
  *               properties:
  *                 data:
  *                   type: array
- *                   
- *         
 */
 
-walletsRoute.get('/', (req: Request, res: Response) => {
+walletsRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
     const { page, size } = req.query as unknown as Query;
     const offset = (page -1) * size;
     Wallets.findAndCountAll(
@@ -118,6 +121,10 @@ walletsRoute.get('/', (req: Request, res: Response) => {
  *     description: Retrieve a single wallet.
  *     tags: [Wallets]
  *     parameters:
+ *       - in: header
+ *         name: jwt_token
+ *         type: apiKey
+ *         required: true
  *       - in: path
  *         name: walletId
  *         required: true
@@ -136,11 +143,10 @@ walletsRoute.get('/', (req: Request, res: Response) => {
  *                     walletId:
  *                       type: string
  *                       description: The wallet id.
- *                       example: yzyz.near
- *         
+ *                       example: yzyz.near   
 */
 
-walletsRoute.get('/:walletId', (req: Request | any, res: Response) => {
+walletsRoute.get('/:walletId', verifyAuthorization, (req: Request | any, res: Response) => {
     Wallets.findAll({
         where : {walletId: req.params.walletId}, 
         include: [
