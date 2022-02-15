@@ -12,7 +12,7 @@ export = {
         allowNull: false
       },
       stackId: {
-        type: Sequelize.STRING,
+        type: Sequelize.BIGINT,
         references : {
           model : 'Stacks',
           key : 'stackId'

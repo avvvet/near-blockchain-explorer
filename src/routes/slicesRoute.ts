@@ -120,7 +120,7 @@ slicesRoute.get('/', (req: Request, res: Response) => {
  *                   properties:
  *                     stackId:
  *                       type: number
- *                       description: The slice id.
+ *                       description: The stack id.
  *                       example: 1
  *
 */

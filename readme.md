@@ -37,6 +37,10 @@
 
   `npx sequelize db:create` will create new PostgreSQL db
 
+  `npx sequelize db:drop` will drop new PostgreSQL db ATENTION
+
   `npx sequelize db:migrate` creates models
 
   `npx sequelize db:seed:all` to seed the test data
+
+  `npx sequelize db:migrate:undo` undo a migration

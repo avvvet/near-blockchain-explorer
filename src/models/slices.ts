@@ -3,7 +3,7 @@ import { sequelize } from '.'
 import Transactions from './transactions';
 
 class Slices extends Model {
-      declare stackId: string
+      declare stackId: number
       declare appName: string
 }
 
