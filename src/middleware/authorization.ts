@@ -6,7 +6,6 @@ const verifyAuthorization = (req: Request, res: Response, next: NextFunction) =>
        if(authHeader) {
            jwt.verify(String(authHeader), String(process.env.JWT_SEC), (err, user) => {
             if(err) return res.status(401).send()
-            console.log('>>>>> user', user)
                 req.body.user = user
                 next()
            })
