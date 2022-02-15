@@ -1,7 +1,7 @@
 
 /**
  * @openapi
- *  components: 
+ *  components:
  *    schemas:
  *      System:
  *         type: object
@@ -21,7 +21,7 @@
 
 /**
  * @openapi
- *  components: 
+ *  components:
  *    schemas:
  *      Transactions:
  *         type: object
@@ -39,7 +39,7 @@
  *                   type: string
  *                   description: Receipt account
  *             sliceId:
- *                   type: string
+ *                   type: number
  *                   description: Slice
  *             walletId:
  *                   type: string
@@ -53,7 +53,7 @@
 /**
  * @swagger
  * tags:
- *   name: System 
+ *   name: System
  *   description: API to get system related information and health.
 */
 

@@ -12,7 +12,7 @@ export = {
         allowNull: false
       },
       stackId: {
-        type: Sequelize.STRING,
+        type: Sequelize.BIGINT,
         references : {
           model : 'Stacks',
           key : 'stackId'
@@ -21,7 +21,7 @@ export = {
         onDelete: 'CASCADE',
       },
       sliceId: {
-        type: Sequelize.STRING,
+        type: Sequelize.BIGINT,
         references : {
           model : 'Slices',
           key : 'sliceId'
