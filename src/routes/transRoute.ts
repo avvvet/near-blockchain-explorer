@@ -41,7 +41,7 @@ interface Query {
  * @swagger
  * tags:
  *   name: Transactions
- *   description: Retrieve a single transaction..
+ *   description: Retrieve transactions
 */
 
 /**
@@ -52,6 +52,10 @@ interface Query {
  *     description: Retrieve transactions.
  *     tags: [Transactions]
  *     parameters:
+ *       - in: header
+ *         name: jwt_token
+ *         type: apiKey
+ *         required: true
  *       - in: query
  *         name: page
  *         required: true
@@ -111,6 +115,10 @@ transRoute.get('/', (req: Request, res: Response) => {
  *     description: Retrieve a single transaction.
  *     tags: [Transactions]
  *     parameters:
+ *       - in: header
+ *         name: jwt_token
+ *         type: apiKey
+ *         required: true
  *       - in: path
  *         name: transactionHash
  *         required: true

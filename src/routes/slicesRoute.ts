@@ -1,6 +1,5 @@
 import { Router, Request, Response } from "express"
 import Slices from "../models/slices";
-import Stacks from '../models/stacks'
 import Transactions from "../models/transactions";
 const slicesRoute = Router()
 
@@ -30,7 +29,7 @@ interface Query {
 /**
  * @swagger
  * tags:
- *   name: SLices
+ *   name: Slices
  *   description: Retrieve Slices (Action) records
 */
 
@@ -42,6 +41,10 @@ interface Query {
  *     description: Retrieve list of Slices.
  *     tags: [Slices]
  *     parameters:
+ *       - in: header
+ *         name: jwt_token
+ *         type: apiKey
+ *         required: true
  *       - in: query
  *         name: page
  *         required: true
@@ -103,6 +106,10 @@ slicesRoute.get('/', (req: Request, res: Response) => {
  *     description: Retrieve a single Slice.
  *     tags: [Slices]
  *     parameters:
+ *       - in: header
+ *         name: jwt_token
+ *         type: apiKey
+ *         required: true
  *       - in: path
  *         name: sliceId
  *         required: true

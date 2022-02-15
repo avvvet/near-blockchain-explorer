@@ -57,6 +57,10 @@ interface Query {
  *     description: Retrieve list of wallets.
  *     tags: [Wallets]
  *     parameters:
+ *       - in: header
+ *         name: jwt_token
+ *         type: apiKey
+ *         required: true
  *       - in: query
  *         name: page
  *         required: true
@@ -75,8 +79,6 @@ interface Query {
  *               properties:
  *                 data:
  *                   type: array
- *                   
- *         
 */
 
 walletsRoute.get('/', (req: Request, res: Response) => {
@@ -118,6 +120,10 @@ walletsRoute.get('/', (req: Request, res: Response) => {
  *     description: Retrieve a single wallet.
  *     tags: [Wallets]
  *     parameters:
+ *       - in: header
+ *         name: jwt_token
+ *         type: apiKey
+ *         required: true
  *       - in: path
  *         name: walletId
  *         required: true
@@ -136,8 +142,7 @@ walletsRoute.get('/', (req: Request, res: Response) => {
  *                     walletId:
  *                       type: string
  *                       description: The wallet id.
- *                       example: yzyz.near
- *         
+ *                       example: yzyz.near   
 */
 
 walletsRoute.get('/:walletId', (req: Request | any, res: Response) => {

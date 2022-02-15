@@ -41,6 +41,10 @@ interface Query {
  *     description: Retrieve list of Apps.
  *     tags: [Stacks]
  *     parameters:
+ *       - in: header
+ *         name: jwt_token
+ *         type: apiKey
+ *         required: true
  *       - in: query
  *         name: page
  *         required: true
@@ -59,8 +63,6 @@ interface Query {
  *               properties:
  *                 data:
  *                   type: array
- *
- *
 */
 
 stacksRoute.get('/', (req: Request, res: Response) => {
@@ -102,6 +104,10 @@ stacksRoute.get('/', (req: Request, res: Response) => {
  *     description: Retrieve a single App.
  *     tags: [Stacks]
  *     parameters:
+ *       - in: header
+ *         name: jwt_token
+ *         type: apiKey
+ *         required: true
  *       - in: path
  *         name: stackId
  *         required: true
