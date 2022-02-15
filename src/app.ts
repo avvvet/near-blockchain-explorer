@@ -51,11 +51,6 @@ app.use(express.json())
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true}))
 app.use('/system', systemRoute)
-
-/**
- *  put end points that need authorization bellow this
- */
-app.use(verifyAuthorization)
 app.use('/transactions', transRoute)
 app.use('/wallets', walletsRoute)
 app.use('/stacks', stacksRoute)

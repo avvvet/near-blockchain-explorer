@@ -1,4 +1,5 @@
 import { Router, Request, Response } from "express"
+import { verifyAuthorization } from "../middleware/authorization";
 import Stacks from '../models/stacks'
 import Transactions from "../models/transactions";
 const stacksRoute = Router()
@@ -65,7 +66,7 @@ interface Query {
  *                   type: array
 */
 
-stacksRoute.get('/', (req: Request, res: Response) => {
+stacksRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
     const { page, size } = req.query as unknown as Query;
     const offset = (page -1) * size;
     Stacks.findAndCountAll(
@@ -130,7 +131,7 @@ stacksRoute.get('/', (req: Request, res: Response) => {
  *
 */
 
-stacksRoute.get('/:stackId', (req: Request | any, res: Response) => {
+stacksRoute.get('/:stackId', verifyAuthorization, (req: Request | any, res: Response) => {
     Stacks.findAll({
         where : {stackId: req.params.stackId},
         include: [
