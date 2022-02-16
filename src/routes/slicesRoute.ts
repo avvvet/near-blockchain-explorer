@@ -1,13 +1,9 @@
 import { Router, Request, Response } from "express"
-import { verifyAuthorization } from "../middleware/authorization";
-import Slices from "../models/slices";
-import Transactions from "../models/transactions";
-const slicesRoute = Router()
-
-interface Query {
-    page: number;
-    size: number;
-}
+import asyncHandler from "express-async-handler"
+import { PaginationQuery } from "./commons/paginationQuery"
+import { SliceService } from "../services";
+const slicesRoute = Router();
+const sliceService = new SliceService();
 
 /**
  * @openapi
@@ -68,36 +64,13 @@ interface Query {
  *
 */
 
-slicesRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
-    const { page, size } = req.query as unknown as Query;
-    const offset = (page -1) * size;
-    Slices.findAndCountAll(
-        {
-            offset: offset, limit: size,
-            include: [
-                {
-                    model: Transactions,
-                    required: true
-                }
-            ],
-            order: [
-                ['createdAt', 'DESC']
-            ],
-            raw: true,
-            nest: true
-        }
-    ).then((result) => {
-        if(result) {
-            const total_pages = Math.ceil(result.count / size);
-            result.count = total_pages
-            if(page > total_pages) return res.status(404).json();
-            return res.status(200).json(result);
-        }
-        return res.status(404).json();
-    }).catch((error) => {
-        return res.status(500).send({message : error.message});
-    });
-})
+slicesRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
+    const { page, size } = req.query as unknown as PaginationQuery;
+
+    const response = await sliceService.getAllPaginated(page, size);
+
+    res.status(200).json(response);
+}))
 
 /**
  * @swagger
@@ -133,25 +106,11 @@ slicesRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
  *
 */
 
-slicesRoute.get('/:sliceId', verifyAuthorization, (req: Request | any, res: Response) => {
-    Slices.findAll({
-        where : {sliceId: req.params.sliceId},
-        include: [
-            {
-                model: Transactions,
-                required: true
-            }
-        ],
-        order: [
-            ['createdAt', 'DESC']
-          ],
-          raw: true,
-          nest: true
-    }).then((results) => {
-        if(results) return res.status(200).json(results)
-    }).catch((error) => {
-        return res.status(500).send({message : error.message});
-    });
-})
+slicesRoute.get('/:sliceId', asyncHandler ( async (req: Request | any, res: Response) => {
+
+    const response =  await sliceService.getById(req.params.sliceId);
+
+    res.status(200).json(response);
+}))
 
 export = slicesRoute

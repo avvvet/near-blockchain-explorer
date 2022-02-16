@@ -1,15 +1,11 @@
-import { Router, Request, Response } from "express"
-import { verifyAuthorization } from "../middleware/authorization";
-import Slices from "../models/slices";
-import Stacks from "../models/stacks";
-import Trans from '../models/transactions'
-import Wallets from "../models/wallets";
-const transRoute = Router()
+import { Router, Request, Response, NextFunction } from "express"
+import asyncHandler from "express-async-handler"
+import { TransactionService } from '../services/'
+import { PaginationQuery } from "./commons/paginationQuery"
 
-interface Query {
-    page: number;
-    size: number;
-}
+const transRoute = Router();
+const transactionService = new TransactionService();
+
 
 /**
  * @openapi
@@ -86,44 +82,18 @@ interface Query {
  *
 */
 
-transRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
-    const { page, size } = req.query as unknown as Query;
-    const offset = (page -1) * size;
-    Trans.findAndCountAll(
-        {
-            offset: offset, limit: size,
-            include: [
-                {
-                    model: Wallets ,
-                    required: true
-                },
-                {
-                    model: Slices ,
-                    required: true
-                },
-                {
-                    model: Stacks ,
-                    required: true
-                },
-            ],
-            order: [
-                ['createdAt', 'DESC']
-            ],
-            raw: true,
-            nest: true
-        }
-    ).then((result) => {
-        if(result) {
-            const total_pages = Math.ceil(result.count / size);
-            result.count = total_pages
-            if(page > total_pages) return res.status(404).json();
-            return res.status(200).json(result);
-        }
-        return res.status(404).json();
-    }).catch((error) => {
-        return res.status(500).send({message : error.message});
-    });
-})
+transRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
+
+    const { page, size } = req.query as unknown as PaginationQuery;
+
+    const response = await transactionService.getAllPaginated(page, size);
+
+    res.status(200).json(response);
+
+}));
+
+
+
 
 /**
  * @swagger
@@ -159,33 +129,14 @@ transRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
  *
 */
 
-transRoute.get('/:transactionHash', verifyAuthorization, (req: Request | any, res: Response) => {
-    Trans.findAll({
-        where : {transactionHash: req.params.transactionHash},
-        include: [
-            {
-                model: Wallets ,
-                required: true
-            },
-            {
-                model: Slices ,
-                required: true
-            },
-            {
-                model: Stacks ,
-                required: true
-            },
-        ],
-        order: [
-            ['createdAt', 'DESC']
-          ],
-          raw: true,
-          nest: true
-    }).then((results) => {
-        if(results) return res.status(200).json(results)
-    }).catch((error) => {
-        return res.status(500).send({message : error.message});
-    });
-})
+transRoute.get('/:transactionHash' , asyncHandler( async (req: Request | any, res: Response) => {
+
+    const transactionHash = req.params.transactionHash;
+
+    const response = await transactionService.getByTransactionHash(transactionHash);
+
+    res.status(200).json(response);
+
+}))
 
 export = transRoute

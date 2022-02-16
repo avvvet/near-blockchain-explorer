@@ -1,13 +1,11 @@
 import { Router, Request, Response } from "express"
-import { verifyAuthorization } from "../middleware/authorization";
-import Stacks from '../models/stacks'
-import Transactions from "../models/transactions";
-const stacksRoute = Router()
+import asyncHandler from "express-async-handler"
+import { PaginationQuery } from "./commons/paginationQuery"
+import { StackService } from '../services/'
 
-interface Query {
-    page: number;
-    size: number;
-}
+const stacksRoute = Router();
+const stackService = new StackService();
+
 
 /**
  * @openapi
@@ -66,36 +64,14 @@ interface Query {
  *                   type: array
 */
 
-stacksRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
-    const { page, size } = req.query as unknown as Query;
-    const offset = (page -1) * size;
-    Stacks.findAndCountAll(
-        {
-            offset: offset, limit: size,
-            include: [
-                {
-                    model: Transactions,
-                    required: true
-                }
-            ],
-            order: [
-                ['createdAt', 'DESC']
-            ],
-            raw: true,
-            nest: true
-        }
-    ).then((result) => {
-        if(result) {
-            const total_pages = Math.ceil(result.count / size);
-            result.count = total_pages
-            if(page > total_pages) return res.status(404).json();
-            return res.status(200).json(result);
-        }
-        return res.status(404).json();
-    }).catch((error) => {
-        return res.status(500).send({message : error.message});
-    });
-})
+stacksRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
+
+    const { page, size } = req.query as unknown as PaginationQuery;
+
+    const response = await stackService.getAllPaginated(page, size);
+
+    res.status(200).json(response);
+}))
 
 /**
  * @swagger
@@ -131,25 +107,12 @@ stacksRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
  *
 */
 
-stacksRoute.get('/:stackId', verifyAuthorization, (req: Request | any, res: Response) => {
-    Stacks.findAll({
-        where : {stackId: req.params.stackId},
-        include: [
-            {
-                model: Transactions,
-                required: true
-            }
-        ],
-        order: [
-            ['createdAt', 'DESC']
-          ],
-          raw: true,
-          nest: true
-    }).then((results) => {
-        if(results) return res.status(200).json(results)
-    }).catch((error) => {
-        return res.status(500).send({message : error.message});
-    });
-})
+stacksRoute.get('/:stackId', asyncHandler (async (req: Request | any, res: Response) => {
+
+    const response =  await stackService.getById(req.params.stackId);
+
+    res.status(200).json(response);
+
+}))
 
 export = stacksRoute
