@@ -1,6 +1,7 @@
-import { Router, Request, Response } from "express"
+import { Router, Request, Response, NextFunction } from "express"
+import asyncHandler from "express-async-handler"
 import { TransactionService } from '../services/'
-import { PaginationQuery } from "./commons/paginationQuery";
+import { PaginationQuery } from "./commons/paginationQuery"
 
 const transRoute = Router();
 const transactionService = new TransactionService();
@@ -81,15 +82,18 @@ const transactionService = new TransactionService();
  *
 */
 
-transRoute.get('/', async (req: Request, res: Response) => {
+transRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
 
     const { page, size } = req.query as unknown as PaginationQuery;
 
     const response = await transactionService.getAllPaginated(page, size);
 
-    return res.status(200).json(response);
+    res.status(200).json(response);
 
-})
+}));
+
+
+
 
 /**
  * @swagger
@@ -125,14 +129,14 @@ transRoute.get('/', async (req: Request, res: Response) => {
  *
 */
 
-transRoute.get('/:transactionHash', async (req: Request | any, res: Response) => {
+transRoute.get('/:transactionHash' , asyncHandler( async (req: Request | any, res: Response) => {
 
     const transactionHash = req.params.transactionHash;
 
     const response = await transactionService.getByTransactionHash(transactionHash);
 
-    return res.status(200).json(response);
+    res.status(200).json(response);
 
-})
+}))
 
 export = transRoute

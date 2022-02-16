@@ -1,7 +1,6 @@
 import { Router, Request, Response } from "express"
-import Stacks from '../models/stacks'
-import Transactions from "../models/transactions";
-import { PaginationQuery } from "./commons/paginationQuery";
+import asyncHandler from "express-async-handler"
+import { PaginationQuery } from "./commons/paginationQuery"
 import { StackService } from '../services/'
 
 const stacksRoute = Router();
@@ -65,10 +64,14 @@ const stackService = new StackService();
  *                   type: array
 */
 
-stacksRoute.get('/', async (req: Request, res: Response) => {
+stacksRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
+
     const { page, size } = req.query as unknown as PaginationQuery;
-    return await stackService.getAllPaginated(page, size);
-})
+
+    const response = await stackService.getAllPaginated(page, size);
+
+    res.status(200).json(response);
+}))
 
 /**
  * @swagger
@@ -104,8 +107,12 @@ stacksRoute.get('/', async (req: Request, res: Response) => {
  *
 */
 
-stacksRoute.get('/:stackId', async (req: Request | any, res: Response) => {
-    return await stackService.getById(req.params.stackId);
-})
+stacksRoute.get('/:stackId', asyncHandler (async (req: Request | any, res: Response) => {
+
+    const response =  await stackService.getById(req.params.stackId);
+
+    res.status(200).json(response);
+
+}))
 
 export = stacksRoute

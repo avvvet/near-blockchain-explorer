@@ -38,7 +38,7 @@ class BaseService {
 
         const totalPages = Math.ceil(result.count / size);
         result.count = totalPages
-        if (page > totalPages) throw new ObjectNotFoundException(`Page: `, String(page));
+        if (page > totalPages) throw new ObjectNotFoundException(`Page:`, String(page));
         return result;
 
     }
