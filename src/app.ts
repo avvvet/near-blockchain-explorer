@@ -12,11 +12,6 @@ import slicesRoute from './routes/slicesRoute'
 import { verifyAuthorization } from './middleware/authorization'
 import cors from 'cors'
 
-// this fix the problem with the swagger-ui-express in http
-// see https://github.com/scottie1984/swagger-ui-express/issues/237 once we have the https in our app
-// we can remove this config
-const cspDefaults = helmet.contentSecurityPolicy.getDefaultDirectives();
-delete cspDefaults['upgrade-insecure-requests'];
 
 
 import errorMiddleware from './middleware/error.middleware';
@@ -56,9 +51,14 @@ const options = {
 
 const specs = swaggerJsdoc(options);
 
-app.use(helmet({
-  contentSecurityPolicy: { directives: cspDefaults }
-}));
+// this fix the problem with the swagger-ui-express in http
+// see https://github.com/scottie1984/swagger-ui-express/issues/237 once we have the https in our app
+// we can remove this config
+// and go back to app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+}))
 
 
 app.use(cors({ origin: true, credentials: true}))
