@@ -11,6 +11,10 @@ import stacksRoute from './routes/stacksRoute'
 import slicesRoute from './routes/slicesRoute'
 import { verifyAuthorization } from './middleware/authorization'
 
+
+import errorMiddleware from './middleware/error.middleware';
+
+
 const app:Express = express()
 const PORT = process.env.PORT || 2707
 
@@ -60,6 +64,8 @@ app.use('/transactions', transRoute)
 app.use('/wallets', walletsRoute)
 app.use('/stacks', stacksRoute)
 app.use('/slices', slicesRoute)
+
+app.use(errorMiddleware);
 
 app.get('/', (req: Request, res: Response) => {
   res.status(200).send('service is running')

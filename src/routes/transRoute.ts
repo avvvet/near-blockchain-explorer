@@ -1,11 +1,10 @@
 import { Router, Request, Response } from "express"
-import Trans from '../models/transactions'
-const transRoute = Router()
+import { TransactionService } from '../services/'
+import { PaginationQuery } from "./commons/paginationQuery";
 
-interface Query {
-    page: number;
-    size: number;
-}
+const transRoute = Router();
+const transactionService = new TransactionService();
+
 
 /**
  * @openapi
@@ -82,29 +81,14 @@ interface Query {
  *
 */
 
-transRoute.get('/', (req: Request, res: Response) => {
-    const { page, size } = req.query as unknown as Query;
-    const offset = (page -1) * size;
-    Trans.findAndCountAll(
-        {
-            offset: offset, limit: size,
-            order: [
-                ['createdAt', 'DESC']
-            ],
-            raw: true,
-            nest: true
-        }
-    ).then((result) => {
-        if(result) {
-            const total_pages = Math.ceil(result.count / size);
-            result.count = total_pages
-            if(page > total_pages) return res.status(404).json();
-            return res.status(200).json(result);
-        }
-        return res.status(404).json();
-    }).catch((error) => {
-        return res.status(500).send({message : error.message});
-    });
+transRoute.get('/', async (req: Request, res: Response) => {
+
+    const { page, size } = req.query as unknown as PaginationQuery;
+
+    const response = await transactionService.getAllPaginated(page, size);
+
+    return res.status(200).json(response);
+
 })
 
 /**
@@ -141,19 +125,14 @@ transRoute.get('/', (req: Request, res: Response) => {
  *
 */
 
-transRoute.get('/:transactionHash', (req: Request | any, res: Response) => {
-    Trans.findAll({
-        where : {transactionHash: req.params.transactionHash},
-        order: [
-            ['createdAt', 'DESC']
-          ],
-          raw: true,
-          nest: true
-    }).then((results) => {
-        if(results) return res.status(200).json(results)
-    }).catch((error) => {
-        return res.status(500).send({message : error.message});
-    });
+transRoute.get('/:transactionHash', async (req: Request | any, res: Response) => {
+
+    const transactionHash = req.params.transactionHash;
+
+    const response = await transactionService.getByTransactionHash(transactionHash);
+
+    return res.status(200).json(response);
+
 })
 
 export = transRoute
