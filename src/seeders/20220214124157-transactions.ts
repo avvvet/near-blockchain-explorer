@@ -21,6 +21,7 @@ export = {
         sliceId: '1',
         walletId: 'yzyz.near',
         tagsJson: JSON.stringify(tagsJson),
+        status: 'UNKNOWN',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -31,6 +32,7 @@ export = {
         sliceId: '1',
         walletId: 'bmw.near',
         tagsJson: JSON.stringify(tagsJson),
+        status: 'UNKNOWN',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -41,6 +43,7 @@ export = {
         sliceId: '2',
         walletId: 'yzyz.near',
         tagsJson: JSON.stringify(tagsJson),
+        status: 'FAILURE',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -51,6 +54,7 @@ export = {
         sliceId: '2',
         walletId: 'yzyz.near',
         tagsJson: JSON.stringify(tagsJson),
+        status: 'UNKNOWN',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -61,6 +65,7 @@ export = {
         sliceId: '1',
         walletId: 'bmw.near',
         tagsJson: JSON.stringify(tagsJson),
+        status: 'UNKNOWN',
         createdAt: new Date(),
         updatedAt: new Date()
       },
@@ -71,6 +76,7 @@ export = {
         sliceId: '2',
         walletId: 'yzyz.near',
         tagsJson: JSON.stringify(tagsJson),
+        status: 'UNKNOWN',
         createdAt: new Date(),
         updatedAt: new Date()
       },
