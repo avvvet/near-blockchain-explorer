@@ -1,6 +1,9 @@
 import { Router, Request, Response } from "express"
 import { verifyAuthorization } from "../middleware/authorization";
+import Slices from "../models/slices";
+import Stacks from "../models/stacks";
 import Trans from '../models/transactions'
+import Wallets from "../models/wallets";
 const transRoute = Router()
 
 interface Query {
@@ -89,6 +92,20 @@ transRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
     Trans.findAndCountAll(
         {
             offset: offset, limit: size,
+            include: [
+                {
+                    model: Wallets ,
+                    required: true
+                },
+                {
+                    model: Slices ,
+                    required: true
+                },
+                {
+                    model: Stacks ,
+                    required: true
+                },
+            ],
             order: [
                 ['createdAt', 'DESC']
             ],
@@ -145,6 +162,20 @@ transRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
 transRoute.get('/:transactionHash', verifyAuthorization, (req: Request | any, res: Response) => {
     Trans.findAll({
         where : {transactionHash: req.params.transactionHash},
+        include: [
+            {
+                model: Wallets ,
+                required: true
+            },
+            {
+                model: Slices ,
+                required: true
+            },
+            {
+                model: Stacks ,
+                required: true
+            },
+        ],
         order: [
             ['createdAt', 'DESC']
           ],

@@ -42,6 +42,11 @@ export = {
         type: Sequelize.JSON,
         allowNull: false
       },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        default: 'pending'
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

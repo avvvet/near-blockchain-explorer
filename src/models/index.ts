@@ -1,6 +1,8 @@
 import { Sequelize } from 'sequelize';
-
+import dotenv from 'dotenv'
+dotenv.config()
 const env = process.env.NODE_ENV || 'development';
+
 const config = require(__dirname + './../config/config.js')[env];
 
 const  sequelize = config.url
