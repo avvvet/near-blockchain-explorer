@@ -9,7 +9,7 @@ import transRoute from './routes/transRoute'
 import walletsRoute from './routes/walletsRoute'
 import stacksRoute from './routes/stacksRoute'
 import slicesRoute from './routes/slicesRoute'
-import { verifyAuthorization } from './middleware/authorization'
+import cors from 'cors'
 
 const app:Express = express()
 const PORT = process.env.PORT || 2707
@@ -33,23 +33,25 @@ const options = {
         email: "info@primelab.io",
       },
     },
+    schemes: ["http", "https"],
     servers: [
       {
         url: "http://127.0.0.1:2707",
       },
     ],
   },
-  apis: ["./dist/routes/system/*.js", "./dist/routes/*.js"],
+  apis: ["**/*.ts"]
 };
 
 const specs = swaggerJsdoc(options);
 
 app.use(helmet())
+app.use(cors({ origin: true, credentials: true}))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.json())
 
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true}))
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: false}))
 app.use('/system', systemRoute)
 app.use('/transactions', transRoute)
 app.use('/wallets', walletsRoute)
