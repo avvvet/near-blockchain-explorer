@@ -7,6 +7,7 @@ class Transactions extends Model {
       declare sliceId: number
       declare walletId: string
       declare tagsJson: object
+      declare status: string
 }
 
 Transactions.init({
@@ -17,7 +18,8 @@ Transactions.init({
   receiptId: DataTypes.STRING,
   sliceId: DataTypes.BIGINT,
   walletId: DataTypes.STRING,
-  tagsJson: DataTypes.JSON
+  tagsJson: DataTypes.JSON,
+  status: DataTypes.STRING
 }, {
   sequelize,
   modelName: 'Transactions',
