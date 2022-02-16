@@ -2,7 +2,7 @@ export = {
   async up(queryInterface: any, Sequelize: any) {
     await queryInterface.createTable('Stacks', {
       stackId: {
-        type: Sequelize.STRING,
+        type: Sequelize.BIGINT,
         allowNull: false,
         primaryKey: true,
         unique: true

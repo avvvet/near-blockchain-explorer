@@ -1,6 +1,5 @@
 import { Router, Request, Response } from "express"
 import Slices from "../models/slices";
-import Stacks from '../models/stacks'
 import Transactions from "../models/transactions";
 const slicesRoute = Router()
 
@@ -11,7 +10,7 @@ interface Query {
 
 /**
  * @openapi
- *  components: 
+ *  components:
  *    schemas:
  *      Slices:
  *         type: object
@@ -20,17 +19,17 @@ interface Query {
  *            - actionName
  *         properties:
  *             sliceId:
- *                  type: string
+ *                  type: number
  *                  description: Action id or slice id
  *             actionName:
  *                   type: string
- *                   description: Action name 
+ *                   description: Action name
  */
 
 /**
  * @swagger
  * tags:
- *   name: SLices
+ *   name: Slices
  *   description: Retrieve Slices (Action) records
 */
 
@@ -42,6 +41,10 @@ interface Query {
  *     description: Retrieve list of Slices.
  *     tags: [Slices]
  *     parameters:
+ *       - in: header
+ *         name: jwt_token
+ *         type: apiKey
+ *         required: true
  *       - in: query
  *         name: page
  *         required: true
@@ -60,15 +63,15 @@ interface Query {
  *               properties:
  *                 data:
  *                   type: array
- *                   
- *         
+ *
+ *
 */
 
 slicesRoute.get('/', (req: Request, res: Response) => {
     const { page, size } = req.query as unknown as Query;
     const offset = (page -1) * size;
     Slices.findAndCountAll(
-        { 
+        {
             offset: offset, limit: size,
             include: [
                 {
@@ -103,6 +106,10 @@ slicesRoute.get('/', (req: Request, res: Response) => {
  *     description: Retrieve a single Slice.
  *     tags: [Slices]
  *     parameters:
+ *       - in: header
+ *         name: jwt_token
+ *         type: apiKey
+ *         required: true
  *       - in: path
  *         name: sliceId
  *         required: true
@@ -113,21 +120,21 @@ slicesRoute.get('/', (req: Request, res: Response) => {
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Slice'
+ *               $ref: '#/components/schemas/Slices'
  *               properties:
  *                 data:
  *                   type: object
  *                   properties:
  *                     stackId:
- *                       type: string
- *                       description: The slice id.
- *                       example: 809da4b0-79e1-4089-a124-0568b31f549j
- *         
+ *                       type: number
+ *                       description: The stack id.
+ *                       example: 1
+ *
 */
 
 slicesRoute.get('/:sliceId', (req: Request | any, res: Response) => {
     Slices.findAll({
-        where : {sliceId: req.params.sliceId}, 
+        where : {sliceId: req.params.sliceId},
         include: [
             {
                 model: Transactions,

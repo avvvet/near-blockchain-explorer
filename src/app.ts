@@ -9,6 +9,7 @@ import transRoute from './routes/transRoute'
 import walletsRoute from './routes/walletsRoute'
 import stacksRoute from './routes/stacksRoute'
 import slicesRoute from './routes/slicesRoute'
+import { verifyAuthorization } from './middleware/authorization'
 
 const app:Express = express()
 const PORT = process.env.PORT || 2707
@@ -46,13 +47,19 @@ const specs = swaggerJsdoc(options);
 app.use(helmet())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.json())
+
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true}))
+app.use('/system', systemRoute)
+
+/**
+ *  put end points that need authorization bellow this
+ */
+app.use(verifyAuthorization)
 app.use('/transactions', transRoute)
 app.use('/wallets', walletsRoute)
 app.use('/stacks', stacksRoute)
 app.use('/slices', slicesRoute)
-app.use('/system', systemRoute)
-
 
 app.get('/', (req: Request, res: Response) => {
   res.status(200).send('service is running')
