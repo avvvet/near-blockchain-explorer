@@ -1,17 +1,16 @@
 import { Router, Request, Response } from "express"
-import { verifyAuthorization } from "../middleware/authorization";
-import Transactions from "../models/transactions";
-import Wallets from '../models/wallets'
-const walletsRoute = Router()
+import asyncHandler from "express-async-handler"
+import { PaginationQuery } from "./commons/paginationQuery"
+import { WalletService } from "../services/";
 
-interface Query {
-    page: number;
-    size: number;
-}
+const walletsRoute = Router()
+const walletService = new WalletService();
+
+
 
 /**
  * @openapi
- *  components: 
+ *  components:
  *    schemas:
  *      Wallets:
  *         type: object
@@ -82,36 +81,11 @@ interface Query {
  *                   type: array
 */
 
-walletsRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
-    const { page, size } = req.query as unknown as Query;
-    const offset = (page -1) * size;
-    Wallets.findAndCountAll(
-        { 
-            offset: offset, limit: size,
-            include: [
-                {
-                    model: Transactions,
-                    required: true
-                }
-            ],
-            order: [
-                ['createdAt', 'DESC']
-            ],
-            raw: true,
-            nest: true
-        }
-    ).then((result) => {
-        if(result) {
-            const total_pages = Math.ceil(result.count / size);
-            result.count = total_pages
-            if(page > total_pages) return res.status(404).json();
-            return res.status(200).json(result);
-        }
-        return res.status(404).json();
-    }).catch((error) => {
-        return res.status(500).send({message : error.message});
-    });
-})
+walletsRoute.get('/', asyncHandler ( async (req: Request, res: Response) => {
+    const { page, size } = req.query as unknown as PaginationQuery;
+    const resposne = await walletService.getAllPaginated(page, size);
+    res.status(200).json(resposne);
+}));
 
 /**
  * @swagger
@@ -143,28 +117,14 @@ walletsRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
  *                     walletId:
  *                       type: string
  *                       description: The wallet id.
- *                       example: yzyz.near   
+ *                       example: yzyz.near
 */
 
-walletsRoute.get('/:walletId', verifyAuthorization, (req: Request | any, res: Response) => {
-    Wallets.findAll({
-        where : {walletId: req.params.walletId}, 
-        include: [
-            {
-                model: Transactions,
-                required: true
-            }
-        ],
-        order: [
-            ['createdAt', 'DESC']
-          ],
-          raw: true,
-          nest: true
-    }).then((results) => {
-        if(results) return res.status(200).json(results)
-    }).catch((error) => {
-        return res.status(500).send({message : error.message});
-    });
-})
+walletsRoute.get('/:walletId', asyncHandler( async (req: Request | any, res: Response) => {
+
+    const response = await walletService.getById(req.params.walletId);
+    res.status(200).json(response);
+
+}));
 
 export = walletsRoute
