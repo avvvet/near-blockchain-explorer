@@ -1,4 +1,5 @@
 import { Router, Request, Response } from "express"
+import { verifyAuthorization } from "../middleware/authorization";
 import Slices from "../models/slices";
 import Transactions from "../models/transactions";
 const slicesRoute = Router()
@@ -67,7 +68,7 @@ interface Query {
  *
 */
 
-slicesRoute.get('/', (req: Request, res: Response) => {
+slicesRoute.get('/', verifyAuthorization, (req: Request, res: Response) => {
     const { page, size } = req.query as unknown as Query;
     const offset = (page -1) * size;
     Slices.findAndCountAll(
@@ -132,7 +133,7 @@ slicesRoute.get('/', (req: Request, res: Response) => {
  *
 */
 
-slicesRoute.get('/:sliceId', (req: Request | any, res: Response) => {
+slicesRoute.get('/:sliceId', verifyAuthorization, (req: Request | any, res: Response) => {
     Slices.findAll({
         where : {sliceId: req.params.sliceId},
         include: [

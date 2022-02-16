@@ -10,6 +10,7 @@ import walletsRoute from './routes/walletsRoute'
 import stacksRoute from './routes/stacksRoute'
 import slicesRoute from './routes/slicesRoute'
 import { verifyAuthorization } from './middleware/authorization'
+import cors from 'cors'
 
 
 import errorMiddleware from './middleware/error.middleware';
@@ -37,29 +38,33 @@ const options = {
         email: "info@primelab.io",
       },
     },
+    schemes: ["http", "https"],
     servers: [
       {
         url: "http://127.0.0.1:2707",
       },
     ],
   },
-  apis: ["./dist/routes/system/*.js", "./dist/routes/*.js"],
+  apis: ["**/*.ts"]
 };
 
 const specs = swaggerJsdoc(options);
 
 app.use(helmet())
+app.use(cors({ origin: true, credentials: true}))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.json())
 
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: true}))
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, { explorer: false}))
 app.use('/system', systemRoute)
+
 
 /**
  *  put end points that need authorization bellow this
  */
-app.use(verifyAuthorization)
+ app.use(verifyAuthorization)
+
 app.use('/transactions', transRoute)
 app.use('/wallets', walletsRoute)
 app.use('/stacks', stacksRoute)
