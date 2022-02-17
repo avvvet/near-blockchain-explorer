@@ -1,6 +1,20 @@
 import { Model, DataTypes, ModelStatic, WhereOptions } from 'sequelize';
 import { ObjectNotFoundException, InternalErrorException } from '../exceptions/';
 
+interface Page{
+    page: number;
+    size: number;
+}
+
+interface ResultItems{
+    items: any[];
+    totalItems: number;
+    totalPages: number;
+    next?: Page,
+    previous?: Page
+}
+
+
 class BaseService {
 
     //recive constructor with sequalize model
@@ -36,10 +50,7 @@ class BaseService {
             throw new InternalErrorException(error.message);
         }
 
-        const totalPages = Math.ceil(result.count / size);
-        result.count = totalPages
-        if (page > totalPages) throw new ObjectNotFoundException(`Page:`, String(page));
-        return result;
+        return this.prepareResultItems(result, page, size);
 
     }
 
@@ -65,6 +76,38 @@ class BaseService {
         }
     }
 
+    public prepareResultItems(result:any, page:number, size:number): ResultItems{
+
+        const totalPages = Math.ceil(result.count / size);
+
+        if (page > totalPages) throw new ObjectNotFoundException(`Page:`, String(page));
+
+        const data : ResultItems = {
+            items: result.rows,
+            totalItems: result.count,
+            totalPages: totalPages,
+        };
+
+        const startIndex = (page - 1) * size;
+        const endIndex = page * size;
+
+        if(endIndex < data.totalItems){
+            data.next = {
+                page: Number(page) + 1,
+                size: Number(size)
+            }
+
+        }
+        if(startIndex > 0){
+            data.previous = {
+                page: Number(page) - 1,
+                size: Number(size)
+            }
+        }
+
+        return data;
+
+    }
 
 
 }
