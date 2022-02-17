@@ -64,9 +64,6 @@ class BaseService {
             throw new InternalErrorException(error.message);
         }
     }
-
-
-
 }
 
 export {
