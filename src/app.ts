@@ -5,18 +5,17 @@ import dontenv from 'dotenv'
 import systemRoute from './routes/system/systemRoute'
 import swaggerUi from 'swagger-ui-express'
 import swaggerJsdoc  from 'swagger-jsdoc'
-import transRoute from './routes/transRoute'
-import walletsRoute from './routes/walletsRoute'
-import stacksRoute from './routes/stacksRoute'
-import slicesRoute from './routes/slicesRoute'
-import contractRoute from './routes/contractRoute'
+import {
+  transRoute,
+  walletsRoute,
+  stacksRoute,
+  slicesRoute,
+  personasRoute,
+  contractRoute
+} from './routes'
 import { verifyAuthorization } from './middleware/authorization'
 import cors from 'cors'
-
-
-
 import errorMiddleware from './middleware/error.middleware';
-
 
 const app:Express = express()
 const PORT = process.env.PORT || 2707
@@ -81,6 +80,7 @@ app.use('/wallets', walletsRoute)
 app.use('/stacks', stacksRoute)
 app.use('/slices', slicesRoute)
 app.use('/contracts', contractRoute)
+app.use('/personas', personasRoute)
 
 app.use(errorMiddleware);
 

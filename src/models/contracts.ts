@@ -14,7 +14,7 @@ Contracts.init({
   executionCount: DataTypes.BIGINT
 }, {
   sequelize,
-  modelName: 'contracts',
+  modelName: 'Contracts',
 });
 
 export default Contracts;

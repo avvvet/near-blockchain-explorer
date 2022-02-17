@@ -2,7 +2,7 @@
 export = {
   async up (queryInterface:any, Sequelize:any) {
 
-    await queryInterface.bulkInsert('contracts',
+    await queryInterface.bulkInsert('Contracts',
     [
       {
         contractId: '62093767-3364-4aec-8cdb-6fb721c597f1',
@@ -30,6 +30,6 @@ export = {
 
 
   async down (queryInterface:any, Sequelize:any) {
-    await queryInterface.bulkDelete('contracts', null, {});
+    await queryInterface.bulkDelete('Contracts', null, {});
   }
 };
