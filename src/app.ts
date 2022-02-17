@@ -10,7 +10,8 @@ import {
   walletsRoute,
   stacksRoute,
   slicesRoute,
-  personasRoute
+  personasRoute,
+  contractRoute
 } from './routes'
 import { verifyAuthorization } from './middleware/authorization'
 import cors from 'cors'
@@ -78,6 +79,7 @@ app.use('/transactions', transRoute)
 app.use('/wallets', walletsRoute)
 app.use('/stacks', stacksRoute)
 app.use('/slices', slicesRoute)
+app.use('/contracts', contractRoute)
 app.use('/personas', personasRoute)
 
 app.use(errorMiddleware);

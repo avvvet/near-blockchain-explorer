@@ -18,50 +18,11 @@
  *                   format: date
  */
 
-
-/**
- * @openapi
- *  components:
- *    schemas:
- *      Transactions:
- *         type: object
- *         required:
- *            - transactionHash
- *            - receiptId
- *            - sliceId
- *            - walletId
- *            - tagsJson
- *         properties:
- *             transactionHash:
- *                  type: string
- *                  description: Transaction hash
- *             receiptId:
- *                   type: string
- *                   description: Receipt account
- *             sliceId:
- *                   type: number
- *                   description: Slice
- *             walletId:
- *                   type: string
- *                   description: Wallet account
- *             tagsJson:
- *                   type: object
- *                   description: Variable data
- */
-
-
 /**
  * @swagger
  * tags:
  *   name: System
  *   description: API to get system related information and health.
-*/
-
-/**
- * @swagger
- * tags:
- *   name: Transactions
- *   description: API to get Transactions.
 */
 
 
@@ -80,17 +41,3 @@
  *                 $ref: '#/components/schemas/System'
  */
 
-/**
- * @openapi
- * /Transactions/{transactionHash}:
- *   get:
- *     description: Get transaction by transactionHash
- *     tags: [Transactions]
- *     responses:
- *       200:
- *         description: Returns specific transaction.
- *         content:
- *           application/json:
- *              schema:
- *                 $ref: '#/components/schemas/Transactions'
- */

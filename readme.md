@@ -33,6 +33,9 @@
   ` - create new RDS for PostgreSQL or your choice db`
   ` - create new user account with create database role`
 
+## model creation
+`npx sequelize model:generate  --name contracts  --attributes  id:string,contractName:string,executionCount:number;`
+
 ## migration
 
   `npx sequelize db:create` will create new PostgreSQL db
@@ -44,3 +47,5 @@
   `npx sequelize db:seed:all` to seed the test data
 
   `npx sequelize db:migrate:undo` undo a migration
+
+  `npx sequelize db:seed --seed 20220217122511-contracts.js`seed a specific file
