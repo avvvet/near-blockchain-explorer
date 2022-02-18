@@ -32,7 +32,8 @@ class BaseService {
             order: [
                 this.defaultOrderBy
             ],
-            raw: true,
+            raw: false,
+            distinct: true, //we need this param in order to have the correct count when we are using include models
             nest: true
         }
 
@@ -61,7 +62,7 @@ class BaseService {
             order: [
                 this.defaultOrderBy
             ],
-            raw: true,
+            raw: false,
             nest: true
         }
 

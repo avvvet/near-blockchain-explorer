@@ -1,7 +1,7 @@
 
 import { BaseService } from './baseService';
 import { ObjectNotValidException } from '../exceptions';
-import Stacks from '../models/stacks';
+import Slice from '../models/slices';
 import Transactions from '../models/transactions';
 
 export class SliceService extends BaseService {
@@ -12,7 +12,7 @@ export class SliceService extends BaseService {
     }];
 
     constructor() {
-        super(Stacks);
+        super(Slice);
     }
 
     public async getAllPaginated(page: number, size: number): Promise<any> {
@@ -21,11 +21,11 @@ export class SliceService extends BaseService {
         );
     }
 
-    public async getById(stackId: number) {
+    public async getById(sliceId: number) {
 
-        if (!stackId) throw new ObjectNotValidException('Slice is required');
+        if (!sliceId) throw new ObjectNotValidException('Slice is required');
 
-        return await super.getAllBy({ stackId }, this.includeModels);
+        return await super.getAllBy({ sliceId }, this.includeModels);
     }
 
 }
