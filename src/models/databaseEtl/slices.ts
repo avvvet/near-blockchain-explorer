@@ -1,6 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '.'
-import Transactions from './transactions';
+import { dbInstance } from '..'
+import Transactions from '../databaseEtl/transactions';
 
 class Slices extends Model {
       declare stackId: number
@@ -14,7 +14,7 @@ Slices.init({
   },
   actionName: DataTypes.STRING
 }, {
-  sequelize,
+  sequelize: dbInstance['databaseEtl'],
   modelName: 'Slices',
 });
 

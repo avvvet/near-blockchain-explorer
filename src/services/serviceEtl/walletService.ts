@@ -1,7 +1,7 @@
-import { BaseService } from './baseService';
-import { ObjectNotValidException } from '../exceptions';
-import Wallets from '../models/wallets';
-import Transactions from '../models/transactions';
+import { BaseService } from '../baseService';
+import { ObjectNotValidException } from '../../exceptions';
+import Wallets from '../../models/databaseEtl/wallets';
+import Transactions from '../../models/databaseEtl/transactions';
 
 export class WalletService extends BaseService{
 

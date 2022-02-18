@@ -1,15 +1,14 @@
-import { BaseService } from './baseService';
-import { ObjectNotValidException } from '../exceptions';
+import { BaseService } from '../baseService';
+import { ObjectNotValidException } from '../../exceptions';
 
-import Contracts from '../models/contracts';
+import Contracts from '../../models/databaseEtl/contracts';
 
 export class ContractService extends BaseService {
-
-    private includeModels = [];
-
     constructor() {
         super(Contracts);
     }
+
+    private includeModels = [];
 
     public async getAllPaginated(page: number, size: number): Promise<any> {
         return super.getAllPaginated(page, size,
@@ -23,7 +22,4 @@ export class ContractService extends BaseService {
 
         return await super.getAllBy({ contractId }, this.includeModels);
     }
-
-
-
 }

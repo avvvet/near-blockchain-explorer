@@ -1,6 +1,6 @@
-import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '.'
-import Transactions from './transactions';
+import { Model, DataTypes } from 'sequelize'
+import { dbInstance } from '..'
+import Transactions from '../databaseEtl/transactions'
 
 class Wallets extends Model {
       declare walletId: string
@@ -22,7 +22,7 @@ Wallets.init({
   nearValue: DataTypes.STRING,
   transxRate: DataTypes.STRING
 }, {
-  sequelize,
+  sequelize: dbInstance['databaseEtl'],
   modelName: 'Wallets',
 });
 

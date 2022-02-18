@@ -1,5 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '.'
+
+import { dbInstance } from '..'
 
 class Transactions extends Model {
       declare transactionHash: string
@@ -21,7 +22,7 @@ Transactions.init({
   tagsJson: DataTypes.JSON,
   status: DataTypes.STRING
 }, {
-  sequelize,
+  sequelize: dbInstance['databaseEtl'],
   modelName: 'Transactions',
 });
 
