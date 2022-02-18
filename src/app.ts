@@ -2,9 +2,9 @@ import express, {Express, Request, Response } from 'express'
 import bodyParser from 'body-parser'
 import helmet from 'helmet'
 import dontenv from 'dotenv'
-import systemRoute from './routes/system/systemRoute'
 import swaggerUi from 'swagger-ui-express'
 import swaggerJsdoc  from 'swagger-jsdoc'
+import systemRoute from './routes/system/systemRoute'
 import {
   transRoute,
   walletsRoute,
@@ -13,6 +13,7 @@ import {
   personasRoute,
   contractRoute
 } from './routes'
+import rawTransRoute from './routes/raws/rawTransRoute'
 import { verifyAuthorization } from './middleware/authorization'
 import cors from 'cors'
 import errorMiddleware from './middleware/error.middleware';
@@ -73,7 +74,7 @@ app.use('/system', systemRoute)
 /**
  *  put end points that need authorization bellow this
  */
- app.use(verifyAuthorization)
+app.use(verifyAuthorization)
 
 app.use('/transactions', transRoute)
 app.use('/wallets', walletsRoute)
@@ -81,6 +82,8 @@ app.use('/stacks', stacksRoute)
 app.use('/slices', slicesRoute)
 app.use('/contracts', contractRoute)
 app.use('/personas', personasRoute)
+
+app.use('/raws/transactions', rawTransRoute)
 
 app.use(errorMiddleware);
 

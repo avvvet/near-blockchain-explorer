@@ -1,14 +1,12 @@
 
-import { BaseService } from './baseService';
-import { ObjectNotValidException } from '../exceptions';
-import Personas from '../models/personas';
+import { BaseService } from '../baseService';
+import { ObjectNotValidException } from '../../exceptions';
+import Personas from '../../models/databaseEtl/personas';
 
 export class PersonaService extends BaseService {
-    
     constructor() {
         super(Personas);
     }
-
 
     public async getAllPaginated(page: number, size: number): Promise<any> {
         return super.getAllPaginated(page, size, []);
@@ -20,5 +18,4 @@ export class PersonaService extends BaseService {
 
         return await super.getAllBy({ personaId }, []);
     }
-
 }

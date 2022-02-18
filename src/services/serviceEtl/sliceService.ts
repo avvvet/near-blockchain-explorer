@@ -1,8 +1,8 @@
 
-import { BaseService } from './baseService';
-import { ObjectNotValidException } from '../exceptions';
-import Slice from '../models/slices';
-import Transactions from '../models/transactions';
+import { BaseService } from '../baseService';
+import { ObjectNotValidException } from '../../exceptions';
+import Slice from '../../models/databaseEtl/slices';
+import Transactions from '../../models/databaseEtl/transactions';
 
 export class SliceService extends BaseService {
 

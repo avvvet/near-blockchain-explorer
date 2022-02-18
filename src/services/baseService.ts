@@ -1,4 +1,4 @@
-import { Model, DataTypes, ModelStatic, WhereOptions } from 'sequelize';
+import { ModelStatic, WhereOptions } from 'sequelize';
 import { ObjectNotFoundException, InternalErrorException } from '../exceptions/';
 
 interface Page{

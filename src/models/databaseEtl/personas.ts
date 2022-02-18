@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '.'
+import { dbInstance } from '..'
 
 class Personas extends Model {
       declare personaId: number
@@ -15,7 +15,7 @@ Personas.init({
   personaName: DataTypes.STRING,
   memberCount: DataTypes.BIGINT
 }, {
-  sequelize,
+  sequelize: dbInstance['databaseEtl'],
   modelName: 'Personas',
 });
 

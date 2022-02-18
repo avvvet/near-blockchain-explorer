@@ -1,16 +1,16 @@
-import { BaseService } from './baseService';
-import { ObjectNotValidException } from '../exceptions';
-
-import Transanction from '../models/transactions';
-import Wallets from '../models/wallets';
-import Stacks from '../models/stacks';
-import Slices from '../models/slices';
-
-
-
+import { BaseService } from '../baseService';
+import { ObjectNotValidException } from '../../exceptions';
+import { 
+    Transactions,
+    Wallets,
+    Stacks,
+    Slices
+} from '../../models/databaseEtl'
 
 class TransactionService extends BaseService {
-
+    constructor(){
+        super(Transactions);
+    }
 
     private includeModels : any[] =  [
         {
@@ -27,10 +27,6 @@ class TransactionService extends BaseService {
         },
     ];
 
-    constructor(){
-        super(Transanction);
-    }
-
     public async getAllPaginated(page: number, size: number): Promise<any>{
         return await super.getAllPaginated(page, size, this.includeModels);
     }
@@ -41,7 +37,6 @@ class TransactionService extends BaseService {
 
         return await super.getAllBy({transactionHash},this.includeModels);
     }
-
 }
 
 export {

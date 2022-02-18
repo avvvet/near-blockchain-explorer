@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '.'
+import { dbInstance } from '..'
 
 class Contracts extends Model {
     declare contractName: string
@@ -13,7 +13,7 @@ Contracts.init({
   contractName: DataTypes.STRING,
   executionCount: DataTypes.BIGINT
 }, {
-  sequelize,
+  sequelize: dbInstance['databaseEtl'],
   modelName: 'Contracts',
 });
 

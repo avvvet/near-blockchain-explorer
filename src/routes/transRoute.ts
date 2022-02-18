@@ -92,9 +92,6 @@ transRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
 
 }));
 
-
-
-
 /**
  * @swagger
  * /transactions/{transactionHash}:
