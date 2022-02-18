@@ -32,7 +32,7 @@ class BaseService {
             order: [
                 this.defaultOrderBy
             ],
-            raw: true,
+            raw: false,
             nest: true
         }
 
@@ -61,7 +61,7 @@ class BaseService {
             order: [
                 this.defaultOrderBy
             ],
-            raw: true,
+            raw: false,
             nest: true
         }
 
