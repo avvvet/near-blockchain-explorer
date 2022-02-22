@@ -20,13 +20,13 @@ Slices.init({
 });
 
 Slices.hasMany(Transactions,
-    {
-        foreignKey: 'sliceId'
-    })
+{
+    foreignKey: 'sliceId'
+})
 
 Transactions.belongsTo(Slices,
-    {
-        foreignKey : 'sliceId',
-    })
+{
+    foreignKey : 'sliceId',
+})
 
 export default Slices

@@ -20,13 +20,13 @@ Stacks.init({
 });
 
 Stacks.hasMany(Transactions,
-    {
-        foreignKey: 'stackId'
-    })
+{
+    foreignKey: 'stackId'
+})
 
 Transactions.belongsTo(Stacks,
-    {
-        foreignKey : 'stackId',
-    })
+{
+    foreignKey : 'stackId',
+})
 
 export default Stacks

@@ -28,13 +28,13 @@ Wallets.init({
 });
 
 Wallets.hasMany(Transactions,
-    {
-        foreignKey: 'walletId'
-    })
+{
+    foreignKey: 'walletId'
+})
 
 Transactions.belongsTo(Wallets,
-    {
-        foreignKey : 'walletId',
-    })
+{
+    foreignKey : 'walletId',
+})
 
 export default Wallets

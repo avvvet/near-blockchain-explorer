@@ -20,14 +20,10 @@ Chunks.init({
         primaryKey: true
     },
     included_in_block_hash: DataTypes.STRING,
-    shard_id: DataTypes.DECIMAL(20,
-        0),
-    signature: DataTypes.DECIMAL(20,
-        0),
-    gas_limit: DataTypes.DECIMAL(20,
-        0),
-    gas_used: DataTypes.DECIMAL(20,
-        0),
+    shard_id: DataTypes.DECIMAL(20, 0),
+    signature: DataTypes.DECIMAL(20, 0),
+    gas_limit: DataTypes.DECIMAL(20, 0),
+    gas_used: DataTypes.DECIMAL(20, 0),
     author_account_id: DataTypes.STRING,
 },
 {
