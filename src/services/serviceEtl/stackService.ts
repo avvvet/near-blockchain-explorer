@@ -9,13 +9,16 @@ export class StackService extends BaseService {
         super(Stacks);
     }
 
-    private includeModels : any[] = [{
-        model: Transactions,
-        required: true
-    }];
+    private includeModels : any[] = [
+        {
+            model: Transactions,
+            required: true
+        }
+    ];
 
     public async getAllPaginated(page: number, size: number): Promise<any> {
-        return super.getAllPaginated(page, size,
+        return super.getAllPaginated(page,
+            size,
             this.includeModels
         );
     }
@@ -24,6 +27,7 @@ export class StackService extends BaseService {
 
         if(!stackId) throw new ObjectNotValidException('stackId is required');
 
-        return await super.getAllBy({stackId},this.includeModels);
+        return await super.getAllBy({stackId},
+            this.includeModels);
     }
 }

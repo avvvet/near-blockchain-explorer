@@ -82,15 +82,17 @@ const transactionService = new TransactionService();
  *
 */
 
-transRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
+transRoute.get('/',
+    asyncHandler( async (req: Request, res: Response) => {
 
-    const { page, size } = req.query as unknown as PaginationQuery;
+        const { page, size } = req.query as unknown as PaginationQuery;
 
-    const response = await transactionService.getAllPaginated(page, size);
+        const response = await transactionService.getAllPaginated(page,
+            size);
 
-    res.status(200).json(response);
+        res.status(200).json(response);
 
-}));
+    }));
 
 /**
  * @swagger
@@ -126,14 +128,15 @@ transRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
  *
 */
 
-transRoute.get('/:transactionHash' , asyncHandler( async (req: Request | any, res: Response) => {
+transRoute.get('/:transactionHash' ,
+    asyncHandler( async (req: Request | any, res: Response) => {
 
-    const transactionHash = req.params.transactionHash;
+        const transactionHash = req.params.transactionHash;
 
-    const response = await transactionService.getByTransactionHash(transactionHash);
+        const response = await transactionService.getByTransactionHash(transactionHash);
 
-    res.status(200).json(response);
+        res.status(200).json(response);
 
-}))
+    }))
 
 export = transRoute

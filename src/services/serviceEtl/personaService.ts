@@ -9,13 +9,16 @@ export class PersonaService extends BaseService {
     }
 
     public async getAllPaginated(page: number, size: number): Promise<any> {
-        return super.getAllPaginated(page, size, []);
+        return super.getAllPaginated(page,
+            size,
+            []);
     }
 
     public async getById(personaId: number) {
 
         if (!personaId) throw new ObjectNotValidException('Persona is required');
 
-        return await super.getAllBy({ personaId }, []);
+        return await super.getAllBy({ personaId },
+            []);
     }
 }

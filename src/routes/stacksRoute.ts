@@ -64,14 +64,16 @@ const stackService = new StackService();
  *                   type: array
 */
 
-stacksRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
+stacksRoute.get('/',
+    asyncHandler( async (req: Request, res: Response) => {
 
-    const { page, size } = req.query as unknown as PaginationQuery;
+        const { page, size } = req.query as unknown as PaginationQuery;
 
-    const response = await stackService.getAllPaginated(page, size);
+        const response = await stackService.getAllPaginated(page,
+            size);
 
-    res.status(200).json(response);
-}))
+        res.status(200).json(response);
+    }))
 
 /**
  * @swagger
@@ -107,12 +109,13 @@ stacksRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
  *
 */
 
-stacksRoute.get('/:stackId', asyncHandler (async (req: Request | any, res: Response) => {
+stacksRoute.get('/:stackId',
+    asyncHandler (async (req: Request | any, res: Response) => {
 
-    const response =  await stackService.getById(req.params.stackId);
+        const response =  await stackService.getById(req.params.stackId);
 
-    res.status(200).json(response);
+        res.status(200).json(response);
 
-}))
+    }))
 
 export = stacksRoute

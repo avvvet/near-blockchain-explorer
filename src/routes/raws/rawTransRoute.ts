@@ -61,14 +61,14 @@ const transactionService = new TransactionService();
  * @swagger
  * tags:
  *   name: Raw Transactions
- *   description: Retrieve Raw Transactions
+ *   description: Retrieve Raw Transactions details with block and chunk reference
 */
 
 /**
  * @swagger
  * /raws/transactions:
  *   get:
- *     summary: Retrieve list of Raw Transactions.
+ *     summary: Retrieve list of Raw Transactions with block and chunk reference.
  *     description: Retrieve Raw transactions.
  *     tags: [Raw Transactions]
  *     parameters:
@@ -102,20 +102,22 @@ const transactionService = new TransactionService();
  *
 */
 
-rawTransRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
-    const { page, size } = req.query as unknown as PaginationQuery;
+rawTransRoute.get('/',
+    asyncHandler( async (req: Request, res: Response) => {
+        const { page, size } = req.query as unknown as PaginationQuery;
 
-    const response = await transactionService.getAllPaginated(page, size);
-    res.status(200).json(response);
+        const response = await transactionService.getAllPaginated(page,
+            size);
+        res.status(200).json(response);
 
-}));
+    }));
 
 /**
  * @swagger
  * /raws/transactions/{transaction_hash}:
  *   get:
  *     summary: Retrieve a Raw Transaction.
- *     description: Retrieve a single Raw Transaction.
+ *     description: Retrieve a single Raw Transaction with block and chunk reference.
  *     tags: [Raw Transactions]
  *     parameters:
  *       - in: header
@@ -143,14 +145,15 @@ rawTransRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
  *                       example: DqozjvmrhrZ1Gnn9WMToRswNmadGU5SHoK13ug1LoEQF
 */
 
-rawTransRoute.get('/:transaction_hash' , asyncHandler( async (req: Request | any, res: Response) => {
+rawTransRoute.get('/:transaction_hash' ,
+    asyncHandler( async (req: Request | any, res: Response) => {
 
-    const transaction_hash = req.params.transaction_hash;
+        const transaction_hash = req.params.transaction_hash;
 
-    const response = await transactionService.getByTransactionHash(transaction_hash);
+        const response = await transactionService.getByTransactionHash(transaction_hash);
 
-    res.status(200).json(response);
+        res.status(200).json(response);
 
-}))
+    }))
 
 export = rawTransRoute

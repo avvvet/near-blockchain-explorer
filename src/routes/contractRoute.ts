@@ -69,13 +69,15 @@ const contractService = new ContractService();
  *
 */
 
-contractRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
-    const { page, size } = req.query as unknown as PaginationQuery;
+contractRoute.get('/',
+    asyncHandler( async (req: Request, res: Response) => {
+        const { page, size } = req.query as unknown as PaginationQuery;
 
-    const response = await contractService.getAllPaginated(page, size);
+        const response = await contractService.getAllPaginated(page,
+            size);
 
-    res.status(200).json(response);
-}))
+        res.status(200).json(response);
+    }))
 
 /**
  * @swagger
@@ -111,11 +113,12 @@ contractRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
  *
 */
 
-contractRoute.get('/:contractId', asyncHandler ( async (req: Request | any, res: Response) => {
+contractRoute.get('/:contractId',
+    asyncHandler ( async (req: Request | any, res: Response) => {
 
-    const response =  await contractService.getById(req.params.contractId);
+        const response =  await contractService.getById(req.params.contractId);
 
-    res.status(200).json(response);
-}))
+        res.status(200).json(response);
+    }))
 
 export = contractRoute

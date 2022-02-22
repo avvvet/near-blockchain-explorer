@@ -7,7 +7,6 @@ const walletsRoute = Router()
 const walletService = new WalletService();
 
 
-
 /**
  * @openapi
  *  components:
@@ -81,11 +80,13 @@ const walletService = new WalletService();
  *                   type: array
 */
 
-walletsRoute.get('/', asyncHandler ( async (req: Request, res: Response) => {
-    const { page, size } = req.query as unknown as PaginationQuery;
-    const resposne = await walletService.getAllPaginated(page, size);
-    res.status(200).json(resposne);
-}));
+walletsRoute.get('/',
+    asyncHandler ( async (req: Request, res: Response) => {
+        const { page, size } = req.query as unknown as PaginationQuery;
+        const resposne = await walletService.getAllPaginated(page,
+            size);
+        res.status(200).json(resposne);
+    }));
 
 /**
  * @swagger
@@ -120,11 +121,12 @@ walletsRoute.get('/', asyncHandler ( async (req: Request, res: Response) => {
  *                       example: yzyz.near
 */
 
-walletsRoute.get('/:walletId', asyncHandler( async (req: Request | any, res: Response) => {
+walletsRoute.get('/:walletId',
+    asyncHandler( async (req: Request | any, res: Response) => {
 
-    const response = await walletService.getById(req.params.walletId);
-    res.status(200).json(response);
+        const response = await walletService.getById(req.params.walletId);
+        res.status(200).json(response);
 
-}));
+    }));
 
 export = walletsRoute

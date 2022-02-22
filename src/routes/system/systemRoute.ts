@@ -44,12 +44,13 @@ const systemRoute = Router()
  *                 $ref: '#/components/schemas/System'
  */
 
-systemRoute.get('/status', (req, res)  => {
-    res.status(200).send({
-        name: 'indexer service api is running ...',
-        date: new Date().toString(),
-        version: '1.0.0',
-       });
-})
+systemRoute.get('/status',
+    (req, res)  => {
+        res.status(200).send({
+            name: 'indexer service api is running ...',
+            date: new Date().toString(),
+            version: '1.0.0',
+        });
+    })
 
 export = systemRoute
