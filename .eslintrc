@@ -10,6 +10,10 @@
       "plugin:@typescript-eslint/recommended"
     ],
     "rules": { 
-        "no-console": 1 // 0=off 1=warn 2=error 
+        "no-console": 1, // 0=off 1=warn 2=error 
+        "array-bracket-newline": 1,
+        "function-call-argument-newline": 1,
+        "indent": 1,
+        "no-multiple-empty-lines": 1
     }
   }

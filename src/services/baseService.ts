@@ -29,9 +29,7 @@ class BaseService {
         const query: any = {
 
             offset: offset, limit: size,
-            order: [
-                this.defaultOrderBy
-            ],
+            order: [this.defaultOrderBy],
             raw: false,
             nest: true
         }
@@ -50,7 +48,9 @@ class BaseService {
             throw new InternalErrorException(error.message);
         }
 
-        return this.prepareResultItems(result, page, size);
+        return this.prepareResultItems(result,
+            page,
+            size);
 
     }
 
@@ -58,9 +58,7 @@ class BaseService {
 
         const query: any = {
             where,
-            order: [
-                this.defaultOrderBy
-            ],
+            order: [this.defaultOrderBy],
             raw: false,
             nest: true
         }
@@ -80,7 +78,8 @@ class BaseService {
 
         const totalPages = Math.ceil(result.count / size);
 
-        if (page > totalPages) throw new ObjectNotFoundException(`Page:`, String(page));
+        if (page > totalPages) throw new ObjectNotFoundException(`Page:`,
+            String(page));
 
         const data : ResultItems = {
             items: result.rows,

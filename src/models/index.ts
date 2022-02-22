@@ -10,9 +10,12 @@ const dbInstance : any = {}
 const databases = Object.keys(config)
 
 for(let i = 0; i < databases.length; i++) {
-  let database = databases[i]
-  let dbConfig = config[database]
-  dbInstance[database] = new Sequelize( dbConfig.database, dbConfig.username, dbConfig.password, dbConfig )
+    const database = databases[i]
+    const dbConfig = config[database]
+    dbInstance[database] = new Sequelize( dbConfig.database,
+        dbConfig.username,
+        dbConfig.password,
+        dbConfig )
 }
 
 export { dbInstance };

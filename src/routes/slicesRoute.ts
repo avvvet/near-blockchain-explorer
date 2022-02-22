@@ -64,13 +64,15 @@ const sliceService = new SliceService();
  *
 */
 
-slicesRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
-    const { page, size } = req.query as unknown as PaginationQuery;
+slicesRoute.get('/',
+    asyncHandler( async (req: Request, res: Response) => {
+        const { page, size } = req.query as unknown as PaginationQuery;
 
-    const response = await sliceService.getAllPaginated(page, size);
+        const response = await sliceService.getAllPaginated(page,
+            size);
 
-    res.status(200).json(response);
-}))
+        res.status(200).json(response);
+    }))
 
 /**
  * @swagger
@@ -106,11 +108,12 @@ slicesRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
  *
 */
 
-slicesRoute.get('/:sliceId', asyncHandler ( async (req: Request | any, res: Response) => {
+slicesRoute.get('/:sliceId',
+    asyncHandler ( async (req: Request | any, res: Response) => {
 
-    const response =  await sliceService.getById(req.params.sliceId);
+        const response =  await sliceService.getById(req.params.sliceId);
 
-    res.status(200).json(response);
-}))
+        res.status(200).json(response);
+    }))
 
 export = slicesRoute

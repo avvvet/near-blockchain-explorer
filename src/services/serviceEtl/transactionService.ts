@@ -28,14 +28,17 @@ class TransactionService extends BaseService {
     ];
 
     public async getAllPaginated(page: number, size: number): Promise<any>{
-        return await super.getAllPaginated(page, size, this.includeModels);
+        return await super.getAllPaginated(page,
+            size,
+            this.includeModels);
     }
 
     public async getByTransactionHash(transactionHash: string): Promise<any>{
 
         if(!transactionHash) throw new ObjectNotValidException('transactionHash is required');
 
-        return await super.getAllBy({transactionHash},this.includeModels);
+        return await super.getAllBy({transactionHash},
+            this.includeModels);
     }
 }
 

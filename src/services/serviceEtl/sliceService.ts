@@ -6,17 +6,20 @@ import Transactions from '../../models/databaseEtl/transactions';
 
 export class SliceService extends BaseService {
 
-    private includeModels = [{
-        model: Transactions,
-        required: true
-    }];
+    private includeModels = [
+        {
+            model: Transactions,
+            required: true
+        }
+    ];
 
     constructor() {
         super(Slice);
     }
 
     public async getAllPaginated(page: number, size: number): Promise<any> {
-        return super.getAllPaginated(page, size,
+        return super.getAllPaginated(page,
+            size,
             this.includeModels
         );
     }
@@ -25,7 +28,8 @@ export class SliceService extends BaseService {
 
         if (!sliceId) throw new ObjectNotValidException('Slice is required');
 
-        return await super.getAllBy({ sliceId }, this.includeModels);
+        return await super.getAllBy({ sliceId },
+            this.includeModels);
     }
 
 }

@@ -36,7 +36,7 @@ const personaService = new PersonaService();
 
 /**
  * @swagger
- * /Personas:
+ * /personas:
  *   get:
  *     summary: Retrieve list of Personas with pagination (filter).
  *     description: Retrieve list of Personas.
@@ -66,13 +66,15 @@ const personaService = new PersonaService();
  *                   type: array
 */
 
-personaRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
-    const { page, size } = req.query as unknown as PaginationQuery;
+personaRoute.get('/',
+    asyncHandler( async (req: Request, res: Response) => {
+        const { page, size } = req.query as unknown as PaginationQuery;
 
-    const response = await personaService.getAllPaginated(page, size);
+        const response = await personaService.getAllPaginated(page,
+            size);
 
-    res.status(200).json(response);
-}))
+        res.status(200).json(response);
+    }))
 
 /**
  * @swagger
@@ -107,11 +109,12 @@ personaRoute.get('/', asyncHandler( async (req: Request, res: Response) => {
  *                       example: 1
 */
 
-personaRoute.get('/:personaId', asyncHandler ( async (req: Request | any, res: Response) => {
+personaRoute.get('/:personaId',
+    asyncHandler ( async (req: Request | any, res: Response) => {
 
-    const response =  await personaService.getById(req.params.personaId);
+        const response =  await personaService.getById(req.params.personaId);
 
-    res.status(200).json(response);
-}))
+        res.status(200).json(response);
+    }))
 
 export = personaRoute

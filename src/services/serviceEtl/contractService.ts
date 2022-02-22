@@ -11,7 +11,8 @@ export class ContractService extends BaseService {
     private includeModels = [];
 
     public async getAllPaginated(page: number, size: number): Promise<any> {
-        return super.getAllPaginated(page, size,
+        return super.getAllPaginated(page,
+            size,
             this.includeModels
         );
     }
@@ -20,6 +21,7 @@ export class ContractService extends BaseService {
 
         if (!contractId) throw new ObjectNotValidException('ContractId is required');
 
-        return await super.getAllBy({ contractId }, this.includeModels);
+        return await super.getAllBy({ contractId },
+            this.includeModels);
     }
 }
