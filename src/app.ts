@@ -8,9 +8,8 @@ import systemRoute from './routes/system/systemRoute'
 import {
     transRoute,
     walletsRoute,
-    stacksRoute,
-    slicesRoute,
-    personasRoute,
+    receiptsRoute,
+    personasHistoryRoute,
     contractRoute
 } from './routes'
 import rawTransRoute from './routes/raws/rawTransRoute'
@@ -80,30 +79,19 @@ app.use('/system',
  */
 app.use(verifyAuthorization)
 
-app.use('/transactions',
-    transRoute)
-app.use('/wallets',
-    walletsRoute)
-app.use('/stacks',
-    stacksRoute)
-app.use('/slices',
-    slicesRoute)
-app.use('/contracts',
-    contractRoute)
-app.use('/personas',
-    personasRoute)
-
-app.use('/raws/transactions',
-    rawTransRoute)
+app.use('/transactions', transRoute)
+app.use('/wallets', walletsRoute)
+app.use('/receipts', receiptsRoute)
+app.use('/contracts', contractRoute)
+app.use('/personas', personasHistoryRoute)
+app.use('/raws/transactions', rawTransRoute)
 
 app.use(errorMiddleware);
 
-app.get('/',
-    (req: Request, res: Response) => {
+app.get('/', (req: Request, res: Response) => {
         res.status(200).send('service is running')
-    })
+})
 
-app.listen(PORT,
-    () => {
+app.listen(PORT, () => {
         console.log(`indexer service running on port ${PORT}`)
-    })
+})

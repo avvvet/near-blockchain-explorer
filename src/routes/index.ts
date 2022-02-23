@@ -1,15 +1,13 @@
 import transRoute from './transRoute'
 import walletsRoute from './walletsRoute'
-import stacksRoute from './stacksRoute'
-import slicesRoute from './slicesRoute'
-import personasRoute from './personasRoute'
+import receiptsRoute from './receiptsRoute'
+import personasHistoryRoute from './personasHistoryRoute'
 import contractRoute from './contractRoute'
 
 export {
     transRoute,
     walletsRoute,
-    stacksRoute,
-    slicesRoute,
-    personasRoute,
+    receiptsRoute,
+    personasHistoryRoute,
     contractRoute
 }

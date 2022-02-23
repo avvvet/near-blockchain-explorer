@@ -3,8 +3,7 @@ import { ObjectNotValidException } from '../../exceptions';
 import { 
     Transactions,
     Wallets,
-    Stacks,
-    Slices
+    Receipts,
 } from '../../models/databaseEtl'
 
 class TransactionService extends BaseService {
@@ -18,13 +17,9 @@ class TransactionService extends BaseService {
             required: true
         },
         {
-            model: Slices ,
+            model: Receipts ,
             required: true
-        },
-        {
-            model: Stacks ,
-            required: true
-        },
+        }
     ];
 
     public async getAllPaginated(page: number, size: number): Promise<any>{
@@ -33,11 +28,11 @@ class TransactionService extends BaseService {
             this.includeModels);
     }
 
-    public async getByTransactionHash(transactionHash: string): Promise<any>{
+    public async getByTransactionId(transactionId: string): Promise<any>{
 
-        if(!transactionHash) throw new ObjectNotValidException('transactionHash is required');
+        if(!transactionId) throw new ObjectNotValidException('transactionId is required');
 
-        return await super.getAllBy({transactionHash},
+        return await super.getAllBy({transactionId},
             this.includeModels);
     }
 }

@@ -1,6 +1,6 @@
 export = {
     async up(queryInterface:any, Sequelize:any) {
-        await queryInterface.createTable('Contracts',
+        await queryInterface.createTable('contracts',
             {
                 contractId: {
                     type: Sequelize.STRING,
@@ -24,6 +24,6 @@ export = {
             });
     },
     async down(queryInterface:any, Sequelize:any) {
-        await queryInterface.dropTable('Contracts');
+        await queryInterface.dropTable('contracts');
     }
 };

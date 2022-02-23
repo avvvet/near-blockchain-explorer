@@ -15,14 +15,12 @@ class TransactionService extends BaseService {
     private includeModels : any[] =  [
         {
             model: Blocks,
-            required: true,
-            include: [
-                {
-                    model: Chunks
-                }
-            ]
+            required: false,
         },
-        
+        {
+            model: Chunks,
+            required: false
+        }
     ];
 
     public async getAllPaginated(page: number, size: number): Promise<any>{

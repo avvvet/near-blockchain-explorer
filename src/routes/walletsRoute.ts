@@ -17,9 +17,7 @@ const walletService = new WalletService();
  *            - walletId
  *            - email
  *            - phone
- *            - personaId
- *            - nearValue
- *            - transxRate
+ *            - total_transactions
  *         properties:
  *             walletId:
  *                  type: string
@@ -30,15 +28,9 @@ const walletService = new WalletService();
  *             phone:
  *                   type: string
  *                   description: User phone
- *             personaId:
+ *             total_transactions:
  *                   type: string
- *                   description: Persona id associated
- *             nearValue:
- *                   type: string
- *                   description: Near value
- *             transxRate:
- *                   type: string
- *                   description: Transaction rate
+ *                   description: Total Transaction
  */
 
 /**

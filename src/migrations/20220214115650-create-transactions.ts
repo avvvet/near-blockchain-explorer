@@ -1,8 +1,8 @@
 export = {
     async up(queryInterface: any, Sequelize: any) {
-        await queryInterface.createTable('Transactions',
+        await queryInterface.createTable('transactions',
             {
-                transactionHash: {
+                transactionId: {
                     type: Sequelize.STRING,
                     allowNull: false,
                     primaryKey: true,
@@ -10,30 +10,23 @@ export = {
                 },
                 receiptId: {
                     type: Sequelize.STRING,
-                    allowNull: false
+                    references : {
+                        model : 'receipts',
+                        key : 'receiptId'
+                    },
+                    onUpdate: 'CASCADE',
+                    onDelete: 'CASCADE',
                 },
                 stackId: {
-                    type: Sequelize.BIGINT,
-                    references : {
-                        model : 'Stacks',
-                        key : 'stackId'
-                    },
-                    onUpdate: 'CASCADE',
-                    onDelete: 'CASCADE',
+                    type: Sequelize.STRING
                 },
                 sliceId: {
-                    type: Sequelize.BIGINT,
-                    references : {
-                        model : 'Slices',
-                        key : 'sliceId'
-                    },
-                    onUpdate: 'CASCADE',
-                    onDelete: 'CASCADE',
+                    type: Sequelize.STRING
                 },
                 walletId: {
                     type: Sequelize.STRING,
                     references : {
-                        model : 'Wallets',
+                        model : 'wallets',
                         key : 'walletId'
                     },
                     onUpdate: 'CASCADE',
@@ -59,6 +52,6 @@ export = {
             });
     },
     async down(queryInterface: any, Sequelize: any) {
-        await queryInterface.dropTable('Transactions');
+        await queryInterface.dropTable('transactions');
     }
 }

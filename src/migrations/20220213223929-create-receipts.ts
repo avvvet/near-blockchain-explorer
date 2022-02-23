@@ -1,31 +1,19 @@
 export = {
     async up(queryInterface: any, Sequelize: any) {
-        await queryInterface.createTable('Wallets',
+        await queryInterface.createTable('receipts',
             {
-                walletId: {
+                receiptId: {
                     type: Sequelize.STRING,
                     allowNull: false,
                     primaryKey: true,
                     unique: true
                 },
-                email: {
+                blockHash: {
                     type: Sequelize.STRING,
                     allowNull: false
                 },
-                phone: {
+                status: {
                     type: Sequelize.STRING,
-                    allowNull: false
-                },
-                personaId: {
-                    type: Sequelize.STRING,
-                    allowNull: false
-                },
-                nearValue: {
-                    type: Sequelize.STRING,
-                    allowNull: false
-                },
-                transxRate: {
-                    type: Sequelize.JSON,
                     allowNull: false
                 },
                 createdAt: {
@@ -39,6 +27,6 @@ export = {
             });
     },
     async down(queryInterface: any, Sequelize: any) {
-        await queryInterface.dropTable('Wallets');
+        await queryInterface.dropTable('receipts');
     }
 }

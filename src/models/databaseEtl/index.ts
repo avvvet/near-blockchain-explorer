@@ -1,14 +1,12 @@
 import Transactions from "./transactions"
-import Stacks from "./stacks"
-import Slices from "./slices"
+import Receipts from "./receipts"
 import Wallets from "./wallets"
 import Contracts from "./contracts"
-import Personas from "./personas"
+import Personas from "./persona_history"
 
 export {
     Transactions,
-    Stacks,
-    Slices,
+    Receipts,
     Wallets,
     Contracts,
     Personas

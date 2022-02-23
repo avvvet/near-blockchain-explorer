@@ -2,11 +2,11 @@ import dotenv from 'dotenv'
 dotenv.config()
 export = {
     "development": {
-        "username": process.env.DB_USERNAME,
-        "password": process.env.DB_PASSWORD,
-        "database": process.env.DB_DATABASE,
-        "host": process.env.DB_HOST,
-        "dialect": process.env.DB_DIALECT,
+        "username": process.env.DB_ETL_USERNAME,
+        "password": process.env.DB_ETL_PASSWORD,
+        "database": process.env.DB_ETL_DATABASE,
+        "host": process.env.DB_ETL_HOST,
+        "dialect": process.env.DB_ETL_DIALECT,
         "operatorsAliases": "Sequelize.Op"
     },
     "test": {

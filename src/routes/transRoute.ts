@@ -14,13 +14,14 @@ const transactionService = new TransactionService();
  *      Transactions:
  *         type: object
  *         required:
- *            - transactionHash
+ *            - transactionId
  *            - receiptId
  *            - sliceId
  *            - walletId
  *            - tagsJson
+ *            - status
  *         properties:
- *             transactionHash:
+ *             transactionId:
  *                  type: string
  *                  description: Transaction hash
  *             receiptId:
@@ -35,6 +36,9 @@ const transactionService = new TransactionService();
  *             tagsJson:
  *                   type: object
  *                   description: Variable data
+ *             status: 
+ *                   type: string
+ *                   description: Transaction status
  */
 
 /**
@@ -75,7 +79,7 @@ const transactionService = new TransactionService();
  *                 data:
  *                   type: array
  *                   properties:
- *                     transactionHash:
+ *                     transactionId:
  *                       type: string
  *                       description: The transaction id.
  *                       example: DqozjvmrhrZ1Gnn9WMToRswNmadGU5SHoK13ug1LoEQF
@@ -96,7 +100,7 @@ transRoute.get('/',
 
 /**
  * @swagger
- * /transactions/{transactionHash}:
+ * /transactions/{transactionId}:
  *   get:
  *     summary: Retrieve a transaction.
  *     description: Retrieve a single transaction.
@@ -107,7 +111,7 @@ transRoute.get('/',
  *         type: apiKey
  *         required: true
  *       - in: path
- *         name: transactionHash
+ *         name: transactionId
  *         required: true
  *         description: ID of the transaction to retrieve.
  *     responses:
@@ -128,12 +132,12 @@ transRoute.get('/',
  *
 */
 
-transRoute.get('/:transactionHash' ,
+transRoute.get('/:transactionId' ,
     asyncHandler( async (req: Request | any, res: Response) => {
 
-        const transactionHash = req.params.transactionHash;
+        const transactionId = req.params.transactionId;
 
-        const response = await transactionService.getByTransactionHash(transactionHash);
+        const response = await transactionService.getByTransactionId(transactionId);
 
         res.status(200).json(response);
 

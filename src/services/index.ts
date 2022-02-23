@@ -1,15 +1,14 @@
 import { TransactionService } from "./serviceEtl/transactionService";
-import {StackService} from "./serviceEtl/stackService";
-import {SliceService} from "./serviceEtl/sliceService";
+
+import {ReceiptService} from "./serviceEtl/receiptService";
 import {WalletService} from "./serviceEtl/walletService";
 import { ContractService } from "./serviceEtl/contractService";
-import { PersonaService } from "./serviceEtl/personaService";
+import { PersonaHistoryService } from "./serviceEtl/personaHistoryService";
 
 export {
     TransactionService,
-    StackService,
-    SliceService,
+    ReceiptService,
     WalletService,
     ContractService,
-    PersonaService
+    PersonaHistoryService
 }
