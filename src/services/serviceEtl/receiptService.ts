@@ -1,10 +1,10 @@
 
 import { BaseService } from '../baseService';
 import { ObjectNotValidException } from '../../exceptions';
-import Slice from '../../models/databaseEtl/slices';
+import Receipts from '../../models/databaseEtl/receipts';
 import Transactions from '../../models/databaseEtl/transactions';
 
-export class SliceService extends BaseService {
+export class ReceiptService extends BaseService {
 
     private includeModels = [
         {
@@ -14,7 +14,7 @@ export class SliceService extends BaseService {
     ];
 
     constructor() {
-        super(Slice);
+        super(Receipts);
     }
 
     public async getAllPaginated(page: number, size: number): Promise<any> {
@@ -24,11 +24,11 @@ export class SliceService extends BaseService {
         );
     }
 
-    public async getById(sliceId: number) {
+    public async getById(receiptId: number) {
 
-        if (!sliceId) throw new ObjectNotValidException('Slice is required');
+        if (!receiptId) throw new ObjectNotValidException('Receipt is required');
 
-        return await super.getAllBy({ sliceId },
+        return await super.getAllBy({ receiptId },
             this.includeModels);
     }
 

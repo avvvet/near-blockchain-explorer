@@ -15,7 +15,7 @@ Contracts.init({
 },
 {
     sequelize: dbInstance['databaseEtl'],
-    modelName: 'Contracts',
+    modelName: 'contracts',
 });
 
 export default Contracts;

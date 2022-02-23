@@ -37,8 +37,9 @@ Transactions.belongsTo(Blocks,
     foreignKey : 'included_in_block_hash',
 })
 
-Blocks.hasOne(Chunks,
+Transactions.belongsTo(Chunks,
 {
-    foreignKey: 'included_in_block_hash'
+    foreignKey: 'included_in_chunk_hash'
 })
+
 export default Blocks

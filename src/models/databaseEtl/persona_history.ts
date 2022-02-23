@@ -1,23 +1,27 @@
 import { Model, DataTypes } from 'sequelize';
+import { Wallets } from '.';
 import { dbInstance } from '..'
 
-class Personas extends Model {
+class PersonaHistory extends Model {
     declare personaId: number
     declare personaName: string
-    declare memberCount: number
+    declare walletId: string
+    declare memeberDate: number
 }
 
-Personas.init({
+PersonaHistory.init({
     personaId: {
         type : DataTypes.BIGINT,
         primaryKey: true
     },
     personaName: DataTypes.STRING,
-    memberCount: DataTypes.BIGINT
+    walletId: DataTypes.STRING,
+    memberDate: DataTypes.DATE
 },
 {
     sequelize: dbInstance['databaseEtl'],
-    modelName: 'Personas',
+    modelName: 'persona_histories',
 });
 
-export default Personas
+
+export default PersonaHistory

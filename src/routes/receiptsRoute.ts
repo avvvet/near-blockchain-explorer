@@ -1,44 +1,46 @@
 import { Router, Request, Response } from "express"
 import asyncHandler from "express-async-handler"
 import { PaginationQuery } from "./commons/paginationQuery"
-import { StackService } from '../services/'
-
-const stacksRoute = Router();
-const stackService = new StackService();
-
+import { ReceiptService } from "../services";
+const receiptsRoute = Router();
+const receiptService = new ReceiptService();
 
 /**
  * @openapi
  *  components:
  *    schemas:
- *      Stacks:
+ *      Receipts:
  *         type: object
  *         required:
- *            - stackId
- *            - appName
+ *            - receiptId
+ *            - blockHash
+ *            - status
  *         properties:
- *             stackId:
+ *             receiptId:
  *                  type: number
- *                  description: App id or stack id
- *             appName:
+ *                  description: Receipt id 
+ *             blockHash:
  *                   type: string
- *                   description: App name
+ *                   description: Transaction block hash
+ *             status: 
+ *                   type: string
+ *                   description: status of receipt
  */
 
 /**
  * @swagger
  * tags:
- *   name: Stacks
- *   description: Retrieve Stacks (App) records
+ *   name: Receipts
+ *   description: Retrieve receipts
 */
 
 /**
  * @swagger
- * /stacks:
+ * /receipts:
  *   get:
- *     summary: Retrieve list of App with pagination (filter).
- *     description: Retrieve list of Apps.
- *     tags: [Stacks]
+ *     summary: Retrieve list of receipts with pagination (filter).
+ *     description: Retrieve list of receipts.
+ *     tags: [Receipts]
  *     parameters:
  *       - in: header
  *         name: jwt_token
@@ -54,22 +56,23 @@ const stackService = new StackService();
  *         description: page size or limit.
  *     responses:
  *       200:
- *         description: List of Apps.
+ *         description: List of receipts.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Stacks'
+ *               $ref: '#/components/schemas/Receipts'
  *               properties:
  *                 data:
  *                   type: array
+ *
+ *
 */
 
-stacksRoute.get('/',
+receiptsRoute.get('/',
     asyncHandler( async (req: Request, res: Response) => {
-
         const { page, size } = req.query as unknown as PaginationQuery;
 
-        const response = await stackService.getAllPaginated(page,
+        const response = await receiptService.getAllPaginated(page,
             size);
 
         res.status(200).json(response);
@@ -77,45 +80,44 @@ stacksRoute.get('/',
 
 /**
  * @swagger
- * /stacks/{stackId}:
+ * /receipts/{receiptId}:
  *   get:
- *     summary: Retrieve a Stack by app/stack id.
- *     description: Retrieve a single App.
- *     tags: [Stacks]
+ *     summary: Retrieve a receipt by id.
+ *     description: Retrieve a single Receipt.
+ *     tags: [Receipts]
  *     parameters:
  *       - in: header
  *         name: jwt_token
  *         type: apiKey
  *         required: true
  *       - in: path
- *         name: stackId
+ *         name: receiptId
  *         required: true
- *         description: ID of the App to retrieve.
+ *         description: ID of the Receipt to retrieve.
  *     responses:
  *       200:
- *         description: A single App data.
+ *         description: A single Receipt data.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Stacks'
+ *               $ref: '#/components/schemas/Receipts'
  *               properties:
  *                 data:
  *                   type: object
  *                   properties:
- *                     stackId:
+ *                     receiptId:
  *                       type: number
- *                       description: The stack id.
+ *                       description: The receipt id.
  *                       example: 1
  *
 */
 
-stacksRoute.get('/:stackId',
-    asyncHandler (async (req: Request | any, res: Response) => {
+receiptsRoute.get('/:receiptId',
+    asyncHandler ( async (req: Request | any, res: Response) => {
 
-        const response =  await stackService.getById(req.params.stackId);
+        const response =  await receiptService.getById(req.params.receiptId);
 
         res.status(200).json(response);
-
     }))
 
-export = stacksRoute
+export = receiptsRoute

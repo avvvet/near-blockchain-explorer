@@ -1,21 +1,29 @@
 export = {
     async up(queryInterface: any, Sequelize: any) {
-        await queryInterface.createTable('Personas',
+        await queryInterface.createTable('persona_histories',
             {
                 personaId: {
-                    type: Sequelize.BIGINT,
+                    type: Sequelize.STRING,
                     allowNull: false,
                     primaryKey: true,
                     unique: true
+                },
+                walletId: {
+                    type: Sequelize.STRING,
+                    references : {
+                        model : 'wallets',
+                        key : 'walletId'
+                    },
+                    onUpdate: 'CASCADE',
+                    onDelete: 'CASCADE',
                 },
                 personaName: {
                     type: Sequelize.STRING,
                     allowNull: false
                 },
-                memberCount: {
-                    type: Sequelize.BIGINT,
+                memberDate: {
+                    type: Sequelize.DATE,
                     allowNull: false,
-                    default: 0
                 },
                 createdAt: {
                     allowNull: false,
@@ -28,6 +36,6 @@ export = {
             });
     },
     async down(queryInterface: any, Sequelize: any) {
-        await queryInterface.dropTable('Personas');
+        await queryInterface.dropTable('persona_histories');
     }
 }

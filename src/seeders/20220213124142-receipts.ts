@@ -1,12 +1,11 @@
 export = {
     up: async (queryInterface: any, Sequelize: any) => {
-        await queryInterface.bulkInsert('wallets', 
+        await queryInterface.bulkInsert('receipts',
             [
                 {
-                    walletId: 'xyxy.near',
-                    email: 'abc@primelab.io',
-                    phone: '+12028518274',
-                    total_transactions: '7454787.34',
+                    receiptId: '21KEhNErCLrFDWWCJ4JfdkbutqVaG18NoFJtTSSMGuFc',
+                    blockHash: '1184Pp7mJ1aoZ7DDTX3LMMWngPUrW8ikbYsoarMtmZi',
+                    status: 'COMPLETE',
                     createdAt: new Date(),
                     updatedAt: new Date()
                 }
@@ -15,7 +14,7 @@ export = {
     },
 
     down: async (queryInterface: any, Sequelize: any) => {
-        await queryInterface.bulkDelete('wallets',
+        await queryInterface.bulkDelete('receipts',
             null,
             {});
     }

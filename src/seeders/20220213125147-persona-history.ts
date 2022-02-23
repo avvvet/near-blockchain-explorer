@@ -1,12 +1,12 @@
 export = {
     up: async (queryInterface: any, Sequelize: any) => {
-        await queryInterface.bulkInsert('wallets', 
+        await queryInterface.bulkInsert('persona_histories',
             [
                 {
+                    personaId: 'a09da4b0-79e1-4089-a124-0568b31f549b',
+                    personaName: 'game centric statistical',
                     walletId: 'xyxy.near',
-                    email: 'abc@primelab.io',
-                    phone: '+12028518274',
-                    total_transactions: '7454787.34',
+                    memberDate: new Date(),
                     createdAt: new Date(),
                     updatedAt: new Date()
                 }
@@ -15,7 +15,7 @@ export = {
     },
 
     down: async (queryInterface: any, Sequelize: any) => {
-        await queryInterface.bulkDelete('wallets',
+        await queryInterface.bulkDelete('persona_histories',
             null,
             {});
     }

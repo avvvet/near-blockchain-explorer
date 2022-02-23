@@ -1,9 +1,9 @@
 import { Router, Request, Response } from "express"
 import asyncHandler from "express-async-handler"
 import { PaginationQuery } from "./commons/paginationQuery"
-import { PersonaService } from "../services";
-const personaRoute = Router();
-const personaService = new PersonaService();
+import { PersonaHistoryService } from "../services";
+const personaHistoryRoute = Router();
+const personaHistoryService = new PersonaHistoryService();
 
 /**
  * @openapi
@@ -14,7 +14,8 @@ const personaService = new PersonaService();
  *         required:
  *            - personaId
  *            - personaName
- *            - memberCount
+ *            - wlletId
+ *            - memberDate
  *         properties:
  *             personaId:
  *                  type: number
@@ -22,24 +23,27 @@ const personaService = new PersonaService();
  *             personaName:
  *                   type: string
  *                   description: Persona name
- *             memberCount:
- *                   type: number
- *                   description: Persona member count
+ *             walletId: 
+ *                   type: string
+ *                   description: wallet reference
+ *             memberDate:
+ *                   type: date
+ *                   description: Member date
  */
 
 /**
  * @swagger
  * tags:
  *   name: Personas
- *   description: Retrieve personas
+ *   description: Retrieve wallet persona history
 */
 
 /**
  * @swagger
  * /personas:
  *   get:
- *     summary: Retrieve list of Personas with pagination (filter).
- *     description: Retrieve list of Personas.
+ *     summary: Retrieve list of persona history with pagination (filter).
+ *     description: Retrieve list of Personas for wallets.
  *     tags: [Personas]
  *     parameters:
  *       - in: header
@@ -56,7 +60,7 @@ const personaService = new PersonaService();
  *         description: page size or limit.
  *     responses:
  *       200:
- *         description: List of Personas.
+ *         description: List of Persona history for wallets.
  *         content:
  *           application/json:
  *             schema:
@@ -66,11 +70,11 @@ const personaService = new PersonaService();
  *                   type: array
 */
 
-personaRoute.get('/',
+personaHistoryRoute.get('/',
     asyncHandler( async (req: Request, res: Response) => {
         const { page, size } = req.query as unknown as PaginationQuery;
 
-        const response = await personaService.getAllPaginated(page,
+        const response = await personaHistoryService.getAllPaginated(page,
             size);
 
         res.status(200).json(response);
@@ -78,10 +82,10 @@ personaRoute.get('/',
 
 /**
  * @swagger
- * /personas/{personaId}:
+ * /personas/{walletId}:
  *   get:
- *     summary: Retrieve a Persona by persona id.
- *     description: Retrieve a single Persona.
+ *     summary: Retrieve a Persona by wallet id.
+ *     description: Retrieve a single wallet Persona.
  *     tags: [Personas]
  *     parameters:
  *       - in: header
@@ -89,9 +93,9 @@ personaRoute.get('/',
  *         type: apiKey
  *         required: true
  *       - in: path
- *         name: personaId
+ *         name: walletId
  *         required: true
- *         description: ID of the Persona to retrieve.
+ *         description: ID of the wallet to retrieve persona.
  *     responses:
  *       200:
  *         description: A single Persona data.
@@ -104,17 +108,17 @@ personaRoute.get('/',
  *                   type: object
  *                   properties:
  *                     personaId:
- *                       type: number
- *                       description: The Persona id.
- *                       example: 1
+ *                       type: string
+ *                       description: The wallet id.
+ *                       example: axyszslsl-sayxyls
 */
 
-personaRoute.get('/:personaId',
+personaHistoryRoute.get('/:walletId',
     asyncHandler ( async (req: Request | any, res: Response) => {
 
-        const response =  await personaService.getById(req.params.personaId);
+        const response =  await personaHistoryService.getById(req.params.walletId);
 
         res.status(200).json(response);
     }))
 
-export = personaRoute
+export = personaHistoryRoute

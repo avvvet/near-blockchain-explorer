@@ -1,15 +1,23 @@
 export = {
     async up(queryInterface: any, Sequelize: any) {
-        await queryInterface.createTable('Stacks',
+        await queryInterface.createTable('wallets',
             {
-                stackId: {
-                    type: Sequelize.BIGINT,
+                walletId: {
+                    type: Sequelize.STRING,
                     allowNull: false,
                     primaryKey: true,
                     unique: true
                 },
-                appName: {
+                email: {
                     type: Sequelize.STRING,
+                    allowNull: false
+                },
+                phone: {
+                    type: Sequelize.STRING,
+                    allowNull: false
+                },
+                total_transactions: {
+                    type: Sequelize.DECIMAL(20,4),
                     allowNull: false
                 },
                 createdAt: {
@@ -23,6 +31,6 @@ export = {
             });
     },
     async down(queryInterface: any, Sequelize: any) {
-        await queryInterface.dropTable('Stacks');
+        await queryInterface.dropTable('wallets');
     }
 }
