@@ -13,6 +13,7 @@ import {
     contractRoute
 } from './routes'
 import rawTransRoute from './routes/raws/rawTransRoute'
+import rawAccountsRoute from './routes/raws/rawAccountsRoute'
 import { verifyAuthorization } from './middleware/authorization'
 import cors from 'cors'
 import errorMiddleware from './middleware/error.middleware';
@@ -42,7 +43,7 @@ const options = {
         schemes: ["http", "https"],
         servers: [
             {
-                url: "http://127.0.0.1:2707",
+                url: "http://54.89.147.139:2707",
             },
         ],
     },
@@ -85,6 +86,7 @@ app.use('/receipts', receiptsRoute)
 app.use('/contracts', contractRoute)
 app.use('/personas', personasHistoryRoute)
 app.use('/raws/transactions', rawTransRoute)
+app.use('/accounts', rawAccountsRoute)
 
 app.use(errorMiddleware);
 
